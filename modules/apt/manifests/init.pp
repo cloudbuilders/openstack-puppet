@@ -16,12 +16,12 @@ class apt::launchpad_repo ($repo_name, $apt_url, $apt_keyserver, $apt_signing_ke
     group   => "root",
     mode    => 0640,
     content => template($apt_templ_source),
-    notify  => Exec["apt-update"],
+    notify  => [ Exec["import-key", Exec["apt-update"] ],
     require => File["/etc/apt/sources.list.d"]
   }
   
   exec { "import-key":
     command     => "/usr/bin/gpg --ignore-time-conflict --no-options --no-default-keyring --secret-keyring /etc/apt/secring.gpg --trustdb-name /etc/apt/trusted.gpg --keyring /etc/apt/trusted.gpg --primary-keyring /etc/apt/trusted.gpg --keyserver ${apt_keyserver} --recv ${apt_signing_key}",
-    subscribe   => File["sources_list-$repo_name"]
+    refreshonly => true
   }
 }
