@@ -18,14 +18,6 @@ class base-node {
 
 class nova-base-node {
   include base-node
-
-  class { 'apt::launchpad_repo':
-    repo_name       => "nova-trunk",
-    apt_url         => "http://ppa.launchpad.net/nova-core/trunk/ubuntu",
-    apt_keyserver   => "keyserver.ubuntu.com",
-    apt_signing_key => "7A4AF09AB1802509C26153211EBA3D372A2356C9"
-  }
-
   include nova-common
 }
 
