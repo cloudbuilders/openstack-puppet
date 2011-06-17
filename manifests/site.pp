@@ -42,6 +42,6 @@ class nova-infra-node {
 
 # TODO: (rp)
 # external node classifier based on cluster yaml file
-node "puppet-client" {
+node default {
   include nova-infra-node
 }
