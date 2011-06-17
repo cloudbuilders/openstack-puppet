@@ -16,7 +16,7 @@ class apt::launchpad_repo ($repo_name, $apt_url, $apt_keyserver, $apt_signing_ke
     group   => "root",
     mode    => 0640,
     content => template($apt_templ_source),
-    notify  => [ Exec["import-key", Exec["apt-update"] ],
+    notify  => [ Exec["import-key"], Exec["apt-update"] ],
     require => File["/etc/apt/sources.list.d"]
   }
   
