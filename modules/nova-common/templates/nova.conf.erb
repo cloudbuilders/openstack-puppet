@@ -1,0 +1,42 @@
+<% Puppet::Parser::Functions.autoloader.loadall -%>
+<% opt = scope.function_configval("options", cluster_name) -%>
+<% ci = scope.function_configval("cluster", cluster_name) -%>
+<% pw = scope.function_configval("passwords", cluster_name) -%>
+# DO NOT EDIT
+#
+# This file is managed by puppet, generated for cluster '<%= cluster_name %>'
+#
+
+--dhcpbridge_flagfile=/etc/nova/nova.conf
+--dhcpbridge=/usr/bin/nova-dhcpbridge
+--logdir=/var/log/nova
+--state_path=/var/lib/nova
+--lock_path=/var/lock/nova
+--verbose
+--network_manager=nova.network.manager.<%= opt['network_manager'] %>
+#--my_ip=<%= ipaddress %>
+--sql_connection=mysql://nova:<%= pw['mysql_nova_password'] -%>@<%= ci['mysql_vip'] -%>/nova
+--libvirt_type=<%= opt['libvirt_type'] %>
+#--osapi_extensions_path=/FIX/WITH/PROPER/DIR/extensions
+#--vncproxy_url=http://INVALID_URL:6080
+#--vncproxy_wwwroot=/FIX/WITH/PROPER/DIR/noVNC
+<% if opt.has_key?('flat_interface') -%>
+--flat_interface=<%= opt['flat_interface'] %>
+<% end -%>
+<% if opt.has_key?('use_ipv6') && opt['use_ipv6'] -%>
+--use_ipv6
+<% end -%>
+<% if opt.has_key?('use_keystone') && opt['use_keystone'] -%>
+--api_paste_config=/etc/nova/api-paste.ini
+<% end -%>
+<% if opt.has_key?('use_glance') && opt['use_glance'] -%>
+--image_service=nova.image.glance.GlanceImageService
+<% end -%>
+
+# Absent config values, not supported by puppet yet:
+#--auth_driver=nova.auth.$AUTH (ldapdriver or dbdriver if using ldap)
+#--public_interface=$INTERFACE
+#--vlan_interface=$INTERFACE
+
+
+
