@@ -1,4 +1,6 @@
 class ssh::config {
+  $pw = configval("passwords", $cluster_name)
+  
   file { "/etc/ssh/sshd_config":
     ensure  => present,
     owner   => "root",
@@ -16,12 +18,13 @@ class ssh::config {
     mode   => 0700
   }
 
+  # FIXME: (rp) should also set up root pw
   file { "/root/.ssh/authorized_keys":
     ensure  => present,
     owner   => "root",
     group   => "root",
     mode    => 0600,
-    content => configval("root_authorized_keys", "passwords", ""),
+    content => $pw["root_authorized_keys"],
     require => File["/root/.ssh"]
   }
 }
