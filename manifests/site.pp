@@ -23,6 +23,7 @@ class nova-base-node {
 
 class nova-compute-node {
   include nova-base-node
+  include nova-compute
 }
 
 class nova-infra-node {
