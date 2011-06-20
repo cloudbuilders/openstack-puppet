@@ -1,5 +1,5 @@
 class nova-common::install {
-  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova" ]
+  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-eventlet" ]
   $nova_common_misc     = [ "euca2ools", "unzip" ]
 
   apt::ppa { "ppa:nova-core/trunk": }
