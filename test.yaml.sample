@@ -1,0 +1,22 @@
+{
+  "options": {
+    "flat_interface": "eth0",
+    "use_keystone": true,
+    "use_ipv6": false,
+    "use_glance": true,
+    "network_manager": "FlatDHCPManager",
+    "libvirt_type": "qemu"
+  },
+
+  "cluster": {
+    "mysql_vip": "127.0.0.1"
+  },
+
+  "passwords": {
+    "mysql_nova_password": "changeme",
+    "mysql_root_password": "changeme",
+    "root_password": "changeme",
+    "root_authorized_keys": "changeme"
+  }
+}
+
