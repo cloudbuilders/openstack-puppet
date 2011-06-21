@@ -1,6 +1,4 @@
 class ssh::config {
-  $pw = configval("passwords", $cluster_name)
-  
   file { "/etc/ssh/sshd_config":
     ensure  => present,
     owner   => "root",
@@ -24,7 +22,7 @@ class ssh::config {
     owner   => "root",
     group   => "root",
     mode    => 0600,
-    content => $pw["root_authorized_keys"],
+    content => $root_authorized_keys,
     require => File["/root/.ssh"]
   }
 }

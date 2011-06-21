@@ -1,14 +1,5 @@
 class nova-db::install {
   # we only have to install if there isn't a nova db
-  $pw = configval("passwords", $cluster_name)
-  $op = configval("options", $cluster_name)
-
-  $mysql_nova_password = $pw['mysql_nova_password']
-  $mysql_root_password = $pw['mysql_root_password']
-  $nova_admin_user = $pw['nova_admin']
-  $nova_admin_password = $pw['nova_admin_password']
-  $fixed_range = $op["fixed_range"]
-  $floating_range = $op["floating_range"]
   
   exec { "create_nova_db":
     command     => "mysql -uroot -p${mysql_root_password} -e 'create database nova'",
