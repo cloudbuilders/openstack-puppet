@@ -1,10 +1,10 @@
-# Site config
+## Site config
 import "classes/*"
 import "sitedefs.pp"
 
-# These are the variables that must be set if not using an
-# external node classifier
-#
+## 
+## Uncomment and copy to site.pp for all-in-one config
+##
 # 
 # $flat_interface = "eth0"
 # $use_keystone = true
@@ -19,15 +19,14 @@ import "sitedefs.pp"
 # $mysql_nova_password = "changeme"
 # $mysql_root_password = "changeme"
 # $root_password = "changeme"
-# $root_authorized_keys = "ssh-dss AAAAymWIgnie.....Xdw== foo@foo.bar.org"
-# $mysql_vip = "MYSQL_IP - changeme"
-# $api_vip = "API_IP - changeme"
-# $rabbitmq_vip = "RABBIT_IP - changeme"
+# $root_authorized_keys = ""
+# $mysql_vip = "127.0.0.1"
+# $api_vip = "127.0.0.1"
+# $rabbitmq_vip = "127.0.0.1"
 #
+#
+#node default {
+#  include nova-infra-node
+#  include nova-compute-node
+#}
 
-# TODO: (rp)
-# external node classifier based on cluster yaml file
-node default {
-  include nova-infra-node
-  include nova-compute-node
-}
