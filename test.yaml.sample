@@ -5,7 +5,17 @@
     "use_ipv6": false,
     "use_glance": true,
     "network_manager": "FlatDHCPManager",
-    "libvirt_type": "qemu"
+    "libvirt_type": "qemu",
+    "fixed_range": "10.0.0.0/24",
+    "floating_range": "10.0.1.0/24",
+
+    "nova_admin_username": "changeme",
+    "nova_admin_password": "changeme",
+    "mysql_nova_password": "changeme",
+    "mysql_root_password": "changeme",
+    "root_password": "changeme",
+    "root_authorized_keys": "ssh-dss AAAAV <snip> iwJD== foo@foo.bar.com",
+
     "mysql_vip": "#{nova-infra}",
     "api_vip": "#{nova-infra}",
     "rabbitmq_vip": "#{nova-infra}"
@@ -18,13 +28,6 @@
     "scheduler": "nova-infra",
     "glance": "nova-infra",
     "nova-compute-node": "nova-compute-.*"
-  },
-
-  "passwords": {
-    "mysql_nova_password": "changeme",
-    "mysql_root_password": "changeme",
-    "root_password": "changeme",
-    "root_authorized_keys": "changeme"
   }
 }
 
