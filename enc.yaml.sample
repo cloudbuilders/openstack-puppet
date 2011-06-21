@@ -1,0 +1,5 @@
+{
+"kick_uri": "http://<bleep_ip>:<bleep_port"
+"kick_user": "<bleep admin user>",
+"kick_pass": "<bleep admin password>"
+}

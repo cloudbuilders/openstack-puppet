@@ -6,10 +6,18 @@
     "use_glance": true,
     "network_manager": "FlatDHCPManager",
     "libvirt_type": "qemu"
+    "mysql_vip": "#{nova-infra}",
+    "api_vip": "#{nova-infra}",
+    "rabbitmq_vip": "#{nova-infra}"
   },
 
   "cluster": {
-    "mysql_vip": "127.0.0.1"
+    "nova-db": "nova-infra",
+    "rabbitmq": "nova-infra",
+    "api": "nova-infra",
+    "scheduler": "nova-infra",
+    "glance": "nova-infra",
+    "nova-compute-node": "nova-compute-.*"
   },
 
   "passwords": {
