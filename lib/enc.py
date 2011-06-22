@@ -73,6 +73,10 @@ enc_manifest = { 'classes': [], 'parameters': {} }
 
 hostname = sys.argv[1].split('.')[0]
 
+if not roles_by_machine.has_key(hostname):
+    # not found..
+    sys.exit(1)
+
 for role in roles_by_machine[hostname]:
     enc_manifest['classes'].append(role)
 
