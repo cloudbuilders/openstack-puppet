@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-  WSGIScriptAlias / /var/lib/dash/openstack-dashboard/dashboard/wsgi/local.wsgi
+  WSGIScriptAlias / /var/lib/dash/openstack-dashboard/dashboard/wsgi/django.wsgi
   WSGIDaemonProcess dashboard user=www-data group=www-data processes=3 threads=10
   WSGIProcessGroup dashboard
 
