@@ -36,6 +36,7 @@ class nova-infra-node {
   include rabbitmq
   include nova-infra
   include glance
+  include dash
 }
 
 class swift-common-node {
