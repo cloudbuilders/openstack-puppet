@@ -1,13 +1,13 @@
 class dash::install {
   
-  $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi", "python-django", "python-django-nose" ]
+  $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi", "python-django", "python-django-nose", "openstackx" ]
   
   package { $dash_common_packages:
     ensure => latest
   }
   
   package { "django-openstack":
-    ensure => present,
+    ensure => latest,
     require => [
       Package["python-django"],
       Package["libapache2-mod-wsgi"],
@@ -42,6 +42,14 @@ class dash::install {
       Exec["dash-checkout"]
     ]
   }
+  
+  file { "django.wsgi":
+    path => "/var/lib/dash/openstack-dashboard/dashboard/wsgi/django.wsgi",
+    ensure => present,
+    require => [
+      Exec["dash-checkout"]
+    ]
+  }
 
   file { "/var/lib/dash/openstack-dashboard/dashboard/local":
     ensure => link,
@@ -66,6 +74,7 @@ class dash::install {
     require => [
       Package["apache2"],
       Exec["dash-db"]
+      File["django.wsgi"]
     ]
   }
 
