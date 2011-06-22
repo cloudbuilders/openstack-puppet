@@ -73,7 +73,7 @@ class dash::install {
     source => "puppet:///modules/dash/000-default",
     require => [
       Package["apache2"],
-      Exec["dash-db"]
+      Exec["dash-db"],
       File["django.wsgi"]
     ]
   }
