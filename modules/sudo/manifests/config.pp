@@ -1,11 +1,11 @@
-class sudoers::config {
+class sudo::config {
   file { "/etc/sudoers":
     ensure  => present,
     owner   => "root",
     group   => "root",
     mode    => 0440,
-    source  => "puppet:///modules/sudoers/sudoers",
-    require => Class["sudoer::install"]
+    source  => "puppet:///modules/sudo/sudoers",
+    require => Class["sudo::install"]
   }
 }
     

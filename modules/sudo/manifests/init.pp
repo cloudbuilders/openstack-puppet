@@ -1,5 +1,5 @@
-class sudoers {
-  include sudoers::install, sudoers::config
+class sudo {
+  include sudo::install, sudo::config
 }
   
 
