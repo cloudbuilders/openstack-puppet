@@ -59,11 +59,10 @@ class dash::install {
     ]
   }
 
-  # FIXME: trigger restart
+  # FIXME: trigger restart doesn't work because notify causes cyclical graph
   file { "/etc/apache2/sites-enabled/000-default":
     ensure => present,
     source => "puppet:///modules/dash/000-default",
-    notify => Service["apache2"],
     require => [
       Package["apache2"],
       Exec["dash-db"]
