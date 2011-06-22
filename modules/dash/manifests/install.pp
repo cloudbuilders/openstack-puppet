@@ -43,13 +43,19 @@ class dash::install {
     ]
   }
 
+  file { "/var/lib/dash/openstack-dashboard/dashboard/local":
+    ensure => link,
+    target => "/var/lib/dash/openstack-dashboard/local"
+  }
+
   file { "local_settings.py":
     path => "/var/lib/dash/openstack-dashboard/local/local_settings.py",
     ensure => present,
     owner  => "www-data",
     source  => "puppet:///modules/dash/local_settings.py",
     require => [
-      Exec["dash-checkout"]
+      Exec["dash-checkout"],
+      File["/var/lib/dash/openstack-dashboard/dashboard/local"]
     ]
   }
 
