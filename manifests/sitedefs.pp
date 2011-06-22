@@ -47,3 +47,8 @@ class swift-proxy-node {
   include swift-common-node
   include swift-proxy
 }
+
+class swift-storage-node {
+  include swift-common-node
+  include swift-storage
+}
