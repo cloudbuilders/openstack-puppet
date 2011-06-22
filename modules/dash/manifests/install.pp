@@ -63,7 +63,7 @@ class dash::install {
   file { "/etc/apache2/sites-enabled/000-default":
     ensure => present,
     source => "puppet:///modules/dash/000-default",
-    notify => Package["apache2"]
+    notify => Package["apache2"],
     require => [
       Package["apache2"],
       Exec["dash-db"]
