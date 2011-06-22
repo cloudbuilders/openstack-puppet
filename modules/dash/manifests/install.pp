@@ -1,6 +1,6 @@
 class dash::install {
   
-  $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi", "python-django" ]
+  $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi", "python-django", "python-django-nose" ]
   
   package { $dash_common_packages:
     ensure => latest
@@ -43,7 +43,8 @@ class dash::install {
     ]
   }
 
-  file { "/var/lib/dash/openstack-dashboard/local_settings.py":
+  file { "local_settings.py":
+    path => "/var/lib/dash/openstack-dashboard/local_settings.py",
     ensure => present,
     owner  => "www-data",
     source  => "puppet:///modules/dash/local_settings.py",
@@ -66,7 +67,8 @@ class dash::install {
     user => "www-data",
     path => "/usr/bin:/bin",
     require => [
-      Exec["dash-checkout"]
+      Exec["dash-checkout"],
+      File["local_settings.py"]
     ]
   }
 }
