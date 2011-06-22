@@ -62,18 +62,19 @@ CACHE_BACKEND = 'dummy://'
 # EMAIL_HOST_USER = 'djangomail'
 # EMAIL_HOST_PASSWORD = 'top-secret!'
 
-NOVA_DEFAULT_ENDPOINT = 'http://localhost:8773/services/Cloud'
-NOVA_DEFAULT_REGION = 'nova'
-NOVA_ACCESS_KEY = 'admin'
-NOVA_SECRET_KEY = 'admin'
-NOVA_ADMIN_USER = 'admin'
-NOVA_PROJECT = 'admin'
+OPENSTACK_ADMIN_TOKEN = "999888777666"
+OPENSTACK_KEYSTONE_URL = "http://localhost:8080/v2.0/"
 
-# Configure these for your outgoing email host
-# EMAIL_HOST = 'smtp.my-company.com'
-# EMAIL_PORT = 25
-## EMAIL_HOST_USER = 'djangomail'
-## EMAIL_HOST_PASSWORD = 'top-secret!'
+# If you have external monitoring links
+EXTERNAL_MONITORING = [
+    ['Nagios','http://foo.com'],
+    ['Ganglia','http://bar.com'],
+]
+
+# If you do not have external monitoring links
+# EXTERNAL_MONITORING = []
+
+TOTAL_CLOUD_RAM_GB = 10
 ",
   }
 
