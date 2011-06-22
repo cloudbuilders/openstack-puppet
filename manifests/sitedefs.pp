@@ -9,6 +9,7 @@ $cluster_name="test"
 
 class base-node {
   include ssh
+  include sudo
   include ntp
   include apt  # additional repos only
 }
