@@ -6,10 +6,9 @@ class nova-common::install {
     location => "http://devpackages.ansolabs.com",
     release => "maverick",
     repos => "main",
-    required_packages => "debian-keyring debian-archive-keyring",
     key => "460DF9BE",
     key_server => "keyserver.ubuntu.com",
-    pin => "-10"
+    pin => "600"
   }
 
   package { $nova_common_packages:
