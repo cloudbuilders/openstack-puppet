@@ -44,7 +44,7 @@ class dash::install {
   }
 
   file { "local_settings.py":
-    path => "/var/lib/dash/openstack-dashboard/local_settings.py",
+    path => "/var/lib/dash/openstack-dashboard/local/local_settings.py",
     ensure => present,
     owner  => "www-data",
     source  => "puppet:///modules/dash/local_settings.py",
