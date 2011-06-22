@@ -15,7 +15,7 @@ class dash::install {
   package { "django-openstack":
     ensure => present,
     require => [
-      Package["python-django"]
+      Package["python-django"],
       Package["libapache2-mod-wsgi"],
       Package["apache2"]
     ]
