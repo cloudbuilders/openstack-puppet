@@ -9,16 +9,16 @@ class nova-common::install {
   apt::sources_list {"rcb":
     ensure => present,
     content => "deb http://devpackages.ansolabs.com maverick main",
-    require => apt::key["460DF9BE"]
+    require => Apt::Key["460DF9BE"]
   }
 
   package { $nova_common_packages:
     ensure  => latest,
-    require => apt::sources_list["rcb"]
+    require => Apt::Sources_list["rcb"]
   }
 
   package { $nova_common_misc:
     ensure  => present,
-    require => apt::sources_list["rcb"]
+    require => Apt::Sources_list["rcb"]
   }
 }
