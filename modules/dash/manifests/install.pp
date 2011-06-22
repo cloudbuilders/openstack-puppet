@@ -15,6 +15,7 @@ class dash::install {
   package { "django-openstack":
     ensure => present,
     require => [
+      Package["python-django"]
       Package["libapache2-mod-wsgi"],
       Package["apache2"]
     ]
@@ -67,7 +68,7 @@ class dash::install {
   }
 
   exec { "dash-db":
-    command => "python /var/lib/dash/opesntack-dashboard/dashboard/manage.py syncdb",
+    command => "python /var/lib/dash/openstack-dashboard/dashboard/manage.py syncdb",
     user => "www-data",
     path => "/usr/bin:/bin",
     require => [
