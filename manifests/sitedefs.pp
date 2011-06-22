@@ -35,6 +35,10 @@ class nova-infra-node {
   include rabbitmq
   include nova-infra
   include glance
-  include nova-compute-node
 }
 
+class swift-common-node {
+  include base-node
+  include swift-common
+}
+  
