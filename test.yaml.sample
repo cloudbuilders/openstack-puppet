@@ -16,6 +16,10 @@
     "root_password": "changeme",
     "root_authorized_keys": "ssh-dss AAAAV <snip> iwJD== foo@foo.bar.com",
 
+    "swift_hash_suffix": "changeme",
+    "swauth_allow_account_management": "false",
+    "swauth_super_admin_key": "changeme"
+
     "mysql_vip": "#{nova-infra}",
     "api_vip": "#{nova-infra}",
     "rabbitmq_vip": "#{nova-infra}"

@@ -1,0 +1,5 @@
+Apt {
+  Get {
+    force-yes "true";
+  }
+}

@@ -42,4 +42,8 @@ class swift-common-node {
   include base-node
   include swift-common
 }
-  
+
+class swift-proxy-node {
+  include swift-common-node
+  include swift-proxy
+}
