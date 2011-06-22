@@ -15,7 +15,7 @@ class swift-common::config {
     ensure => directory,
     owner  => 'swift',
     group  => 'swift',
-    mode   => '2700',
+    mode   => 2770,
     require => User['swift']
   }
 
