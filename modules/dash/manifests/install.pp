@@ -32,6 +32,7 @@ class dash::install {
   exec { "dash-checkout":
     command => "git clone git://github.com/cloudbuilders/openstack-dashboard.git -b trunk_safe /var/lib/dash",
     unless => "test -d /var/lib/dash/.git",
+    path => "/usr/bin:/bin",
     user => "www-data",
     require => [
       Package["django-openstack"]
@@ -68,6 +69,7 @@ class dash::install {
   exec { "dash-db":
     command => "python /var/lib/dash/opesntack-dashboard/dashboard/manage.py syncdb",
     user => "www-data",
+    path => "/usr/bin:/bin",
     require => [
       Exec["dash-checkout"]
     ]
