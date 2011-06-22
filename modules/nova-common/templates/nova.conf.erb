@@ -13,11 +13,19 @@
 #--my_ip=<%= ipaddress %>
 --sql_connection=mysql://nova:<%= mysql_nova_password -%>@<%= mysql_vip -%>/nova
 --libvirt_type=<%= libvirt_type %>
+--rabbit_host=<%= rabbitmq_vip %>
+--cc_host=<%= api_vip %>
 #--osapi_extensions_path=/FIX/WITH/PROPER/DIR/extensions
 #--vncproxy_url=http://INVALID_URL:6080
 #--vncproxy_wwwroot=/FIX/WITH/PROPER/DIR/noVNC
 <% if defined?(flat_interface) -%>
 --flat_interface=<%= flat_interface %>
+<% end -%>
+<% if defined?(use_ec2) and use_ec2 -%>
+--ec2_url=http://<%= api_vip %>:8773/services/Cloud
+<% end -%>
+<% if defined?(use_s3) and use_s3 -%>
+--s3_host=<%= api_vip %>
 <% end -%>
 <% if defined?(use_ipv6) and use_ipv6 -%>
 --use_ipv6
