@@ -1,7 +1,7 @@
 class nova-common::install {
   $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-eventlet" ]
-  $nova_common_misc     = [ "euca2ools", "unzip" ]
 
+  # FIXME(ja): move this to rcb common, then glance, keystone, ... don't need to require nova common
   apt::source { "rcb":
     location => "http://devpackages.ansolabs.com",
     release => "maverick",
@@ -16,8 +16,4 @@ class nova-common::install {
     require => Apt::Source["rcb"]
   }
 
-  package { $nova_common_misc:
-    ensure  => present,
-    require => Apt::Source["rcb"]
-  }
 }
