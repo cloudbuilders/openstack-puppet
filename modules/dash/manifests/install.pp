@@ -2,6 +2,10 @@ class dash::install {
   
   $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi", "openstackx" ]
   
+  package { "python-django":
+    ensure => "1.3-2"
+  }
+  
   package { $dash_common_packages:
     ensure => latest
   }
@@ -10,6 +14,7 @@ class dash::install {
     ensure => latest,
     require => [
       Package["libapache2-mod-wsgi"],
+      Package["python-django"],
       Package["apache2"]
     ]
   }
@@ -17,6 +22,7 @@ class dash::install {
   package { "openstack-dashboard":
     ensure => latest,
     require => [
+      Package["python-django"],
       Package["django-openstack"]
     ]
   }
