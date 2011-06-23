@@ -50,7 +50,7 @@ class dash::install {
     owner  => "www-data",
     source  => "puppet:///modules/dash/local_settings.py",
     require => [
-      Exec["dash-checkout"],
+      Package["openstack-dashboard"],
       File["/var/lib/dash/openstack-dashboard/dashboard/local"]
     ]
   }
