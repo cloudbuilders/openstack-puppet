@@ -38,6 +38,7 @@ class dash::install {
   
   file { "django.wsgi":
     path => "/var/lib/dash/dashboard/wsgi/django.wsgi",
+    source  => "puppet:///modules/dash/django.wsgi",
     ensure => present,
     require => [
       Package["openstack-dashboard"]
