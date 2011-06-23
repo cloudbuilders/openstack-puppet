@@ -1,10 +1,10 @@
 <VirtualHost *:80>
-  WSGIScriptAlias / /var/lib/dash/openstack-dashboard/dashboard/wsgi/django.wsgi
+  WSGIScriptAlias / /var/lib/dash/dashboard/wsgi/django.wsgi
   WSGIDaemonProcess dashboard user=www-data group=www-data processes=3 threads=10
   WSGIProcessGroup dashboard
 
   DocumentRoot /var/lib/dash/.blackhole/
-  Alias /media /var/lib/dash/openstack-dashboard/media
+  Alias /media /var/lib/dash/media
 
   <Directory />
       Options FollowSymLinks
