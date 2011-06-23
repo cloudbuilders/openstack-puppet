@@ -36,13 +36,13 @@ class dash::install {
     ]
   }
   
-  # file { "django.wsgi":
-  #   path => "/var/lib/dash/dashboard/wsgi/django.wsgi",
-  #   ensure => present,
-  #   require => [
-  #     Package["openstack-dashboard"]
-  #   ]
-  # }
+  file { "django.wsgi":
+    path => "/var/lib/dash/dashboard/wsgi/django.wsgi",
+    ensure => present,
+    require => [
+      Package["openstack-dashboard"]
+    ]
+  }
 
   file { "/var/lib/dash/dashboard/local":
     ensure => link,
@@ -66,8 +66,8 @@ class dash::install {
     source => "puppet:///modules/dash/000-default",
     require => [
       Package["apache2"],
-      Exec["dash-db"]
-      # File["django.wsgi"]
+      Exec["dash-db"],
+      File["django.wsgi"]
     ]
   }
 
