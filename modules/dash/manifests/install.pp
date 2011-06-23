@@ -15,21 +15,8 @@ class dash::install {
     ]
   }
 
-  file { "/var/lib/dash/":
-    ensure => directory,
-    owner  => "www-data",
-    mode   => 0755,
-    require => [
-      Package["apache2"]
-    ]
-  }
-
-  # FIXME(ja): this should check version - existance
-  exec { "dash-checkout":
-    command => "git clone git://github.com/cloudbuilders/openstack-dashboard.git -b trunk_safe /var/lib/dash",
-    unless => "test -d /var/lib/dash/.git",
-    path => "/usr/bin:/bin",
-    user => "www-data",
+  package { "openstack-dashboard":
+    ensure => latest,
     require => [
       Package["django-openstack"]
     ]
@@ -40,25 +27,25 @@ class dash::install {
     owner  => "www-data",
     mode   => 0755,
     require => [
-      Exec["dash-checkout"]
+      Package["openstack-dashboard"]
     ]
   }
   
-  file { "django.wsgi":
-    path => "/var/lib/dash/openstack-dashboard/dashboard/wsgi/django.wsgi",
-    ensure => present,
-    require => [
-      Exec["dash-checkout"]
-    ]
-  }
+  # file { "django.wsgi":
+  #   path => "/var/lib/dash/dashboard/wsgi/django.wsgi",
+  #   ensure => present,
+  #   require => [
+  #     Package["openstack-dashboard"]
+  #   ]
+  # }
 
-  file { "/var/lib/dash/openstack-dashboard/dashboard/local":
+  file { "/var/lib/dash/dashboard/local":
     ensure => link,
-    target => "/var/lib/dash/openstack-dashboard/local"
+    target => "/var/lib/dash/local"
   }
 
   file { "local_settings.py":
-    path => "/var/lib/dash/openstack-dashboard/local/local_settings.py",
+    path => "/var/lib/dash/local/local_settings.py",
     ensure => present,
     owner  => "www-data",
     source  => "puppet:///modules/dash/local_settings.py",
@@ -74,17 +61,17 @@ class dash::install {
     source => "puppet:///modules/dash/000-default",
     require => [
       Package["apache2"],
-      Exec["dash-db"],
-      File["django.wsgi"]
+      Exec["dash-db"]
+      # File["django.wsgi"]
     ]
   }
 
   exec { "dash-db":
-    command => "python /var/lib/dash/openstack-dashboard/dashboard/manage.py syncdb",
+    command => "python /var/lib/dash/dashboard/manage.py syncdb",
     user => "www-data",
     path => "/usr/bin:/bin",
     require => [
-      Exec["dash-checkout"],
+      Package["openstack-dashboard"],
       File["local_settings.py"]
     ]
   }
