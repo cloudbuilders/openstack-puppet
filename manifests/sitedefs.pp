@@ -37,6 +37,7 @@ class nova-infra-node {
   include nova-infra
   include glance
   include dash
+  include keystone
 }
 
 class swift-common-node {
