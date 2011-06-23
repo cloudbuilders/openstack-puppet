@@ -24,6 +24,7 @@ class dash::install {
     ]
   }
 
+  # FIXME(ja): this should check version - existance
   exec { "dash-checkout":
     command => "git clone git://github.com/cloudbuilders/openstack-dashboard.git -b trunk_safe /var/lib/dash",
     unless => "test -d /var/lib/dash/.git",
