@@ -8,8 +8,4 @@ class nova-infra::service {
     subscribe => File["/etc/nova/nova.conf"]
   }
   
-  file { "nova-default":
-    path => "/etc/default/nova-common",
-    content => "ENABLED=1"
-  }
 }

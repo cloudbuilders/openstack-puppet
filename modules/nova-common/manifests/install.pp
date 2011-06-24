@@ -15,5 +15,11 @@ class nova-common::install {
     ensure  => latest,
     require => Apt::Source["rcb"]
   }
+  
+  file { "nova-default":
+    path => "/etc/default/nova-common",
+    content => "ENABLED=1",
+    require => Package["nova-common"]
+  }
 
 }
