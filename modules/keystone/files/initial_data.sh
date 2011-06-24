@@ -10,6 +10,8 @@ keystone-manage $* user add admin secrete admin
 
 # Roles
 keystone-manage $* role add Admin
+keystone-manage $* role add Member
+keystone-manage $* role grant Admin admin
 
 #endpointTemplates
 keystone-manage $* baseURLs add RegionOne swift http://swift.publicinternets.com/v1/AUTH_%tenant_id% http://swift.admin-nets.local:8080/ http://127.0.0.1:8080/v1/AUTH_%tenant_id% 1
