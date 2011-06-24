@@ -19,7 +19,7 @@ keystone-manage $* baseURLs add RegionOne glance http://glance.publicinternets.c
 keystone-manage $* baseURLs add RegionOne keystone http://keystone.publicinternets.com/v2.0 http://127.0.0.1:8081/v2.0 http://127.0.0.1:8080/v2.0 1
 
 # Tokens
-keystone-manage $* token add 999888777666 admin 1234 2015-02-05T00:00
+keystone-manage $* token add 999888777666 admin admin 2015-02-05T00:00
 
 #Tenant endpoints
 keystone-manage $* tenant_baseURL add admin 1
