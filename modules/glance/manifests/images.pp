@@ -11,7 +11,7 @@ class glance::images {
   
   exec { "install-images":
     command => "/var/lib/glance/initial_images.sh",
-    user => "nova",
+    user => "glance",
     path => "/usr/bin:/bin",
     unless => "test -f /var/lib/glance/images/1",
     require => [
