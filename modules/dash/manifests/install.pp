@@ -76,7 +76,7 @@ class dash::install {
     command => "python /var/lib/dash/dashboard/manage.py syncdb",
     user => "www-data",
     path => "/usr/bin:/bin",
-    unless => "test -f /var/lib/dash/local/dashboard_openstack.sqlite3"
+    unless => "test -f /var/lib/dash/local/dashboard_openstack.sqlite3",
     require => [
       Package["openstack-dashboard"],
       File["local_settings.py"]
