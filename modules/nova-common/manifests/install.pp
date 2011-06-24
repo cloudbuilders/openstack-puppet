@@ -8,7 +8,7 @@ class nova-common::install {
     repos => "main",
     key => "460DF9BE",
     key_server => "keyserver.ubuntu.com",
-    pin => "-1"
+    pin => "1"
   }
 
   package { $nova_common_packages:
