@@ -57,7 +57,7 @@ for role, rolematch in cluster_details['cluster'].items():
     for hwinfo in oskick_details['hardware']:
         hostname = hwinfo['hostname']
         
-        if re.match(rolematch, hostname):
+        if hostname and re.match(rolematch, hostname):
             if not roles_by_machine.has_key(hostname):
                 roles_by_machine[hostname] = []
             roles_by_machine[hostname].append(role)
