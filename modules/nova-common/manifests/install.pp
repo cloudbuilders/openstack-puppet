@@ -4,7 +4,7 @@ class nova-common::install {
   # FIXME(ja): move this to rcb common, then glance, keystone, ... don't need to require nova common
   apt::source { "rcb":
     location => "http://devpackages.ansolabs.com",
-    release => "maverick",
+    release => "rcb",
     repos => "main",
     key => "460DF9BE",
     key_server => "keyserver.ubuntu.com",
