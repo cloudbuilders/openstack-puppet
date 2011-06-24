@@ -4,7 +4,7 @@ class glance::images {
     path => "/var/lib/glance/initial_images.sh",
     ensure  => present,
     owner   => "glance",
-    mode    => 0700,
+    mode    => 0755,
     source  => "puppet:///modules/glance/initial_images.sh",
     require => Package["glance"]
   }
