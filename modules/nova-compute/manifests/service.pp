@@ -5,11 +5,4 @@ class nova-compute::service {
     subscribe => File["/etc/nova/nova.conf"],
     require   => Class["nova-compute::install"]
   }
-
-  service { "nova-network":
-    ensure    => running,
-    enable    => true,
-    subscribe => File["/etc/nova/nova.conf"],
-    require   => Class["nova-compute::install"]
-  }
 }
