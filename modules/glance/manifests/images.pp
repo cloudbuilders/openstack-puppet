@@ -8,6 +8,19 @@ class glance::images {
     source  => "puppet:///modules/glance/initial_images.sh",
     require => Package["glance"]
   }
+  
+  exec { "install-images":
+    command => "/var/lib/glance/initial_images.sh",
+    user => "nova",
+    path => "/usr/bin:/bin",
+    unless => "test -d /var/lib/glance/images/1",
+    require => [
+      Service["glance-api"],
+      Service["nova-api"],
+      Service["glance-registry"],
+      File["initial_images.sh"]
+    ]
+  }
 
 }
   
