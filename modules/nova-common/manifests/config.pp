@@ -8,4 +8,11 @@ class nova-common::config {
     content => template("nova-common/nova.conf.erb"),
     require => Class["nova-common::install"]
   }
+  # set permissions for /dev/kvm
+  file { "/dev/kvm":
+    ensure  => exists,
+    owner   => root,
+    group   => kvm,
+    mode    => 0775
+  }
 }
