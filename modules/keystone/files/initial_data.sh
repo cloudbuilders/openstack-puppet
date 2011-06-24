@@ -22,8 +22,14 @@ keystone-manage $* baseURLs add RegionOne keystone http://keystone.publicinterne
 keystone-manage $* token add 999888777666 admin 1234 2015-02-05T00:00
 
 #Tenant endpoints
-keystone-manage $* tenant_baseURL add 1234 1
-keystone-manage $* tenant_baseURL add 1234 2
-keystone-manage $* tenant_baseURL add 1234 3
-keystone-manage $* tenant_baseURL add 1234 4
-keystone-manage $* tenant_baseURL add 1234 5
+keystone-manage $* tenant_baseURL add admin 1
+keystone-manage $* tenant_baseURL add admin 2
+keystone-manage $* tenant_baseURL add admin 3
+keystone-manage $* tenant_baseURL add admin 4
+keystone-manage $* tenant_baseURL add admin 5
+
+keystone-manage $* tenant_baseURL add demo 1
+keystone-manage $* tenant_baseURL add demo 2
+keystone-manage $* tenant_baseURL add demo 3
+keystone-manage $* tenant_baseURL add demo 4
+keystone-manage $* tenant_baseURL add demo 5
