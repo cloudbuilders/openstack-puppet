@@ -1,7 +1,6 @@
 class nova-infra::install {
   # not all of these are probably requires on an infra box
-  # FIXME shouldn't have to specify nova-novnc here
-  $nova_infra_packages = [ "nova-api", "nova-objectstore", "nova-scheduler", "nova-network", "nova-vncproxy", "nova-novnc" ]
+  $nova_infra_packages = [ "nova-api", "nova-objectstore", "nova-scheduler", "nova-network"  ]
 
   package { $nova_infra_packages:
     ensure => latest

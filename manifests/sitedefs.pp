@@ -35,6 +35,7 @@ class nova-infra-node {
   include nova-db
   include rabbitmq
   include nova-infra
+  include nova-vncproxy
   include glance
   include dash
   include keystone
