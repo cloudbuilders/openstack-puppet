@@ -26,13 +26,20 @@ class nova-compute-node {
 
 class nova-infra-node {
   include nova-base-node
-  include mysql::server
-  include nova-db
+
+  # data services
   include rabbitmq
+  include mysql::server
+
+  # database setup
+  include nova-db
+
+  # openstack services
+  include nova-api
   include nova-network
   include nova-scheduler
-  include nova-api
   include nova-vncproxy
+
   include glance
   include dash
   include keystone

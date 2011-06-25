@@ -12,6 +12,7 @@ class dash::install {
   
   package { "django-openstack":
     ensure => latest,
+    notify => Service["apache2"],
     require => [
       Package["libapache2-mod-wsgi"],
       Package["python-django"],
@@ -21,6 +22,7 @@ class dash::install {
 
   package { "openstack-dashboard":
     ensure => latest,
+    notify => Service["apache2"],
     require => [
       Package["python-django"],
       Package["django-openstack"]
