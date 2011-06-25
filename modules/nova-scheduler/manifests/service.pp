@@ -1,7 +1,6 @@
-class nova-infra::service {
-  $nova_infra_services = [ "nova-scheduler", "nova-network" ]
+class nova-scheduler::service {
 
-  service { $nova_infra_services:
+  service { "nova-scheduler":
     ensure    => running,
     enable    => true,
     require   => File["nova-default"],
