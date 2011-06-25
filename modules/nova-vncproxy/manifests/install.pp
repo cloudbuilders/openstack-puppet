@@ -3,6 +3,9 @@ class nova-vncproxy::install {
   
   package { "nova-vncproxy":
     ensure => latest
+    require => [
+      Package["nova-novnc"]
+    ]
   }
 
   package { "nova-novnc":
