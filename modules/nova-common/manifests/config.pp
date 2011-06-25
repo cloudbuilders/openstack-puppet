@@ -10,7 +10,7 @@ class nova-common::config {
   }
   # set permissions for /dev/kvm
   file { "/dev/kvm":
-    ensure  => exists,
+    ensure  => present,
     owner   => root,
     group   => kvm,
     mode    => 0775
