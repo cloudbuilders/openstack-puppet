@@ -18,7 +18,7 @@
 --api_paste_config=/etc/nova/nova-api-paste.ini
 --osapi_extensions_path=/var/lib/nova/extensions
 --glance_api_servers=<%= glance_vip %>
---vncproxy_url=http://<%= ipaddress %>>:6080
+--vncproxy_url=http://<%= vncproxy_host %>:6080
 --vncproxy_wwwroot=/var/lib/nova/noVNC
 <% if defined?(flat_interface) -%>
 --flat_interface=<%= flat_interface %>

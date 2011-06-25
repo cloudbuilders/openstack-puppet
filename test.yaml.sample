@@ -24,6 +24,7 @@
     "api_vip": "#{nova-infra}",
     "glance_vip": "#{nova-infra}",
     "rabbitmq_vip": "#{nova-infra}"
+    "vncproxy_host": "#{nova-infra}",
   },
 
   "cluster": {
