@@ -6,7 +6,7 @@ class nova-api::install {
 
   file { "nova-api-paste.ini":
     path => "/etc/nova/nova-api-paste.ini",
-    source  => "puppet:///modules/nova-infra/nova-api-paste.ini",
+    source  => "puppet:///modules/nova-api/nova-api-paste.ini",
     ensure => present,
     require => [
       Package["nova-api"]
