@@ -1,5 +1,5 @@
 class nova-infra::service {
-  $nova_infra_services = [ "nova-objectstore", "nova-scheduler", "nova-network" ]
+  $nova_infra_services = [ "nova-scheduler", "nova-network" ]
 
   service { $nova_infra_services:
     ensure    => running,
