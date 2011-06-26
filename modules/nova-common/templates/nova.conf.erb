@@ -10,7 +10,7 @@
 --lock_path=/var/lock/nova
 --verbose
 --network_manager=nova.network.manager.<%= network_manager %>
-#--my_ip=<%= ipaddress %>
+--my_ip=<%= ipaddress %>
 --sql_connection=mysql://nova:<%= mysql_nova_password -%>@<%= mysql_vip -%>/nova
 --libvirt_type=<%= libvirt_type %>
 --rabbit_host=<%= rabbitmq_vip %>
