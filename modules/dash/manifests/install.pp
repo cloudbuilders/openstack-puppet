@@ -65,6 +65,7 @@ class dash::install {
 
   # FIXME: trigger restart doesn't work because notify causes cyclical graph
   file { "apache-site":
+    path => "/etc/apache2/sites-enabled/000-default",
     ensure => present,
     source => "puppet:///modules/dash/000-default",
     require => [
