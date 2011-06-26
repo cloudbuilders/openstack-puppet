@@ -56,7 +56,7 @@ class dash::install {
     path => "/var/lib/dash/local/local_settings.py",
     ensure => present,
     owner  => "www-data",
-    source  => "puppet:///modules/dash/local_settings.py",
+    content => template("dash/local_settings.py.erb"),
     require => [
       Package["openstack-dashboard"],
       File["/var/lib/dash/dashboard/local"]
