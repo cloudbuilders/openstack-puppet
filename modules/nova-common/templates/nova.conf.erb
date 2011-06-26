@@ -27,6 +27,9 @@
 <% if has_variable?('use_s3') and use_s3 then -%>
 --s3_host=<%= api_vip %>
 <% end -%>
+<% if has_variable?('fixed_range') -%>
+--fixed_range=<%= fixed_range %>
+<% end %>
 <% if has_variable?('use_ipv6') and use_ipv6 then -%>
 --use_ipv6
 <% end -%>
