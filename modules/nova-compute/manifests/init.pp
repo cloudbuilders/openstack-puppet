@@ -9,5 +9,13 @@ class nova-compute {
     group   => kvm,
     mode    => 0775
   }
+  
+  # LIBVIRT adds a default network ... we need to kill it!
+  exec { "kill-libvirt-default-net":
+    command => "virsh net-destroy default; rm /etc/libvirt/qemu/networks/autostart/default.xml",
+    path => "/usr/bin:/bin",
+    onlyif => "test -f /etc/libvirt/qemu/networks/autostart/default.xml"
+  }
+
 }
 
