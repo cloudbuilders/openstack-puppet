@@ -10,6 +10,7 @@
 --lock_path=/var/lock/nova
 --verbose
 --network_manager=nova.network.manager.<%= network_manager %>
+--scheduler_driver=nova.scheduler.simple.SimpleSchedule
 --my_ip=<%= ipaddress %>
 --sql_connection=mysql://nova:<%= mysql_nova_password -%>@<%= mysql_vip -%>/nova
 --libvirt_type=<%= libvirt_type %>
