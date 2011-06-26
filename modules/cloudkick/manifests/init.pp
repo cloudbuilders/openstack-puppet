@@ -1,4 +1,20 @@
 class cloudkick {
+
+  exec { "cloudkick_aptkey":
+    path => "/bin:/usr/bin",
+    command => "curl http://packages.cloudkick.com/cloudkick.packages.key | apt-key add -",
+    unless => "apt-key list | grep -q Cloudkick"
+  }
+  
+  apt::source { "cloudkick":
+    location => "http://packages.cloudkick.com/ubuntu",
+    release => "maverick",
+    repos => "main",
+    require => [
+      Exec["cloudkick_aptkey"]
+    ]
+  }
+  
   file {
     # '/usr/lib/cloudkick-agent':
     #   ensure => directory;
@@ -15,7 +31,10 @@ class cloudkick {
   
   package { 'cloudkick-agent':
     ensure => latest,
-    require => File["/etc/cloudkick.conf"];
+    require => [
+      Apt::Source["cloudkick"],
+      File["/etc/cloudkick.conf"]
+    ]
   }
 
   service { "cloudkick-agent":
