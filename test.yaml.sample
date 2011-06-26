@@ -25,6 +25,8 @@
     "glance_vip": "#{nova-infra}",
     "rabbitmq_vip": "#{nova-infra}"
     "vncproxy_host": "#{nova-infra}",
+
+    "site_branding": "lab.rcb.me",
   },
 
   "cluster": {
