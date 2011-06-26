@@ -15,27 +15,26 @@
 --libvirt_type=<%= libvirt_type %>
 --rabbit_host=<%= rabbitmq_vip %>
 --cc_host=<%= api_vip %>
---api_paste_config=/etc/nova/nova-api-paste.ini
 --osapi_extensions_path=/var/lib/nova/extensions
 --glance_api_servers=<%= glance_vip %>
 --vncproxy_url=http://<%= vncproxy_host %>
 --vncproxy_wwwroot=/var/lib/nova/noVNC
-<% if has_variable?(flat_interface) then -%>
+<% if has_variable?('flat_interface') then -%>
 --flat_interface=<%= flat_interface %>
 <% end -%>
-<% if has_variable?(use_ec2) and use_ec2 then -%>
+<% if has_variable?('use_ec2') and use_ec2 then -%>
 --ec2_url=http://<%= api_vip %>:8773/services/Cloud
 <% end -%>
-<% if has_variable?(use_s3) and use_s3 then -%>
+<% if has_variable?('use_s3') and use_s3 then -%>
 --s3_host=<%= api_vip %>
 <% end -%>
-<% if has_variable?(use_ipv6) and use_ipv6 then -%>
+<% if has_variable?('use_ipv6') and use_ipv6 then -%>
 --use_ipv6
 <% end -%>
-<% if has_variable?(use_keystone) && use_keystone then -%>
+<% if has_variable?('use_keystone') and use_keystone then -%>
 --api_paste_config=/etc/nova/api-paste.ini
 <% end -%>
-<% if has_variable?(use_glance) && use_glance then -%>
+<% if has_variable?('use_glance') and use_glance then -%>
 --image_service=nova.image.glance.GlanceImageService
 <% end -%>
 
