@@ -23,7 +23,7 @@
     "mysql_vip": "#{nova-infra}",
     "api_vip": "#{nova-infra}",
     "glance_vip": "#{nova-infra}",
-    "rabbitmq_vip": "#{nova-infra}"
+    "rabbitmq_vip": "#{nova-infra}",
     "vncproxy_host": "#{nova-infra}",
 
     "site_branding": "lab.rcb.me",
