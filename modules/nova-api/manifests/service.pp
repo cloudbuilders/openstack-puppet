@@ -7,7 +7,10 @@ class nova-api::service {
       File["nova-default"],
       File["api-paste.ini"]
     ],
-    subscribe => File["/etc/nova/nova.conf"]
+    subscribe => [
+      File["/etc/nova/nova.conf"],
+      File["api-paste.ini"]
+    ]
   }
   
 }
