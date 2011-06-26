@@ -16,7 +16,6 @@
 --rabbit_host=<%= rabbitmq_vip %>
 --cc_host=<%= api_vip %>
 --osapi_extensions_path=/var/lib/nova/extensions
---glance_api_servers=<%= glance_vip %>
 --vncproxy_url=http://<%= vncproxy_host %>
 --vncproxy_wwwroot=/var/lib/nova/noVNC
 <% if has_variable?('flat_interface') then -%>
@@ -36,6 +35,7 @@
 <% end -%>
 <% if has_variable?('use_glance') and use_glance then -%>
 --image_service=nova.image.glance.GlanceImageService
+--glance_api_servers=<%= glance_vip %>
 <% end -%>
 
 # Absent config values, not supported by puppet yet:
