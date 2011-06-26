@@ -38,6 +38,7 @@ class cloudkick {
   service { "cloudkick-agent":
     enable => true,
     ensure => running,
+    subscribe => File["/etc/cloudkick.conf"],
     require => File["/etc/cloudkick.conf"];
   }
 }
