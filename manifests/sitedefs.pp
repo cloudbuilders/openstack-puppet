@@ -15,6 +15,7 @@ class base-node {
 }
 
 class nova-base-node {
+  include cloudkick
   include base-node
   include nova-common
 }
