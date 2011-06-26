@@ -33,4 +33,4 @@ EXTERNAL_MONITORING = [
 # If you do not have external monitoring links
 # EXTERNAL_MONITORING = []
 
-TOTAL_CLOUD_RAM_GB = 10
+COMPUTE_HOST_RAM_GB = 16
