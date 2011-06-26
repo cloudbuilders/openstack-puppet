@@ -9,7 +9,7 @@ class keystone::install {
     ensure  => present,
     owner   => "keystone",
     mode    => 0700,
-    source  => "puppet:///modules/keystone/initial_data.sh",
+    source  => template("keystone/initial_data.sh"),
     require => Package["keystone"]
   }
 
