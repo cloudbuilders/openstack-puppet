@@ -6,15 +6,13 @@ class cloudkick {
     unless => "apt-key list | grep -q Cloudkick"
   }
   
-  apt::source { "cloudkick":
-    location => "http://packages.cloudkick.com/ubuntu",
-    release => "maverick",
-    repos => "main",
-    require => [
-      Exec["cloudkick_aptkey"]
-    ]
+  exec { "cloudkick_apt":
+    path => "/bin:/usr/bin",
+    command => "echo 'deb http://packages.cloudkick.com/ubuntu maverick main' > /etc/apt/sources.list.d/cloudkick.list; apt-get update",
+    unless => "test -f /etc/apt/sources.list.d/cloudkick.list",
+    require => Exec["cloudkick_aptkey"]
   }
-  
+    
   file {
     # '/usr/lib/cloudkick-agent':
     #   ensure => directory;
@@ -32,7 +30,7 @@ class cloudkick {
   package { 'cloudkick-agent':
     ensure => latest,
     require => [
-      Apt::Source["cloudkick"],
+      Exec["cloudkick_apt"],
       File["/etc/cloudkick.conf"]
     ]
   }
