@@ -8,6 +8,11 @@
 --logdir=/var/log/nova
 --state_path=/var/lib/nova
 --lock_path=/var/lock/nova
+--max_cores=64
+--max_gigabytes=128
+--quota_instances=1000
+--quota_cores=1000
+--quota_ram=1000000
 --verbose
 --network_manager=nova.network.manager.<%= network_manager %>
 --scheduler_driver=nova.scheduler.simple.SimpleScheduler
