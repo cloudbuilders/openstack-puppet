@@ -14,11 +14,11 @@ keystone-manage $* role add Member
 keystone-manage $* role grant Admin admin
 
 #endpointTemplates
-keystone-manage $* baseURLs add RegionOne swift http://<%= ipaddress %>/v1/AUTH_%tenant_id% http://<%= ipaddress %>:8080/ http://<%= ipaddress %>:8080/v1/AUTH_%tenant_id% 1
-keystone-manage $* baseURLs add RegionOne nova_compat http://<%= ipaddress %>/v1.0/ http://<%= ipaddress %>:8774/v1.0  http://<%= ipaddress %>:8774/v1.0 1
-keystone-manage $* baseURLs add RegionOne nova http://<%= ipaddress %>/v1.1/ http://<%= ipaddress %>:8774/v1.1  http://<%= ipaddress %>:8774/v1.1 1
-keystone-manage $* baseURLs add RegionOne glance http://<%= ipaddress %>/v1.1/%tenant_id% http://<%= ipaddress %>/v1.1/%tenant_id% http://<%= ipaddress %>:9292/v1.1/%tenant_id% 1
-keystone-manage $* baseURLs add RegionOne keystone http://<%= ipaddress %>/v2.0 http://<%= ipaddress %>:8081/v2.0 http://<%= ipaddress %>:8080/v2.0 1
+keystone-manage $* baseURLs add RegionOne swift http://<%= api_vip %>/v1/AUTH_%tenant_id% http://<%= api_vip %>:8080/ http://<%= api_vip %>:8080/v1/AUTH_%tenant_id% 1
+keystone-manage $* baseURLs add RegionOne nova_compat http://<%= api_vip %>/v1.0/ http://<%= api_vip %>:8774/v1.0  http://<%= api_vip %>:8774/v1.0 1
+keystone-manage $* baseURLs add RegionOne nova http://<%= api_vip %>/v1.1/ http://<%= api_vip %>:8774/v1.1  http://<%= api_vip %>:8774/v1.1 1
+keystone-manage $* baseURLs add RegionOne glance http://<%= api_vip %>/v1.1/%tenant_id% http://<%= api_vip %>/v1.1/%tenant_id% http://<%= api_vip %>:9292/v1.1/%tenant_id% 1
+keystone-manage $* baseURLs add RegionOne keystone http://<%= api_vip %>/v2.0 http://<%= api_vip %>:8081/v2.0 http://<%= api_vip %>:8080/v2.0 1
 
 # Tokens
 keystone-manage $* token add 999888777666 admin admin 2015-02-05T00:00
