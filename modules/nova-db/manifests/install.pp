@@ -53,11 +53,11 @@ class nova-db::install {
     notify => Exec["create_default_secgroup"]
   }
   
-  exec { "create_default_secgroup":
-    command     => "mysql nova -uroot -p${mysql_root_password} < /var/lib/nova/secgroup.sql",
-    path        => [ "/bin", "/usr/bin" ],
-    refreshonly => true,
-    require     => File['secgroup.sql']
-  }
+  # exec { "create_default_secgroup":
+  #   command     => "mysql nova -uroot -p${mysql_root_password} < /var/lib/nova/secgroup.sql",
+  #   path        => [ "/bin", "/usr/bin" ],
+  #   refreshonly => true,
+  #   require     => File['secgroup.sql']
+  # }
 }
   
