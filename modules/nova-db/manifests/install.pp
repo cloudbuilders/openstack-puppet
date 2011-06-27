@@ -30,6 +30,7 @@ class nova-db::install {
     require     => Class['nova-common']
   }
 
+  # FIXME(ja): we shouldn't need this - since users are created in keystone
   exec { "create_admin_user":
     command     => "nova-manage user admin ${nova_admin_user} ${nova_admin_password}",
     path        => [ "/bin", "/usr/bin" ],
