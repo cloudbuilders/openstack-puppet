@@ -13,5 +13,9 @@ class nova-api::install {
     ]
   }
 
+  package { openstackx:
+    ensure => latest,
+    notify => Service["nova-api"],
+  }
 }
   
