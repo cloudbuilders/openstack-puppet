@@ -50,7 +50,7 @@ class nova-db::install {
     path => "/var/lib/nova/secgroup.sql",
     require => Package['nova-common'],
     source => "puppet:///modules/nova-db/secgroup.sql",
-    notify => Exec["create_default_secgroup"]
+    # notify => Exec["create_default_secgroup"]
   }
   
   # exec { "create_default_secgroup":
