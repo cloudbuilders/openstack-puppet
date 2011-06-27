@@ -44,6 +44,7 @@ class nova-infra-node {
   include glance
   include dash
   include keystone
+  include openstackx
 }
 
 class swift-common-node {

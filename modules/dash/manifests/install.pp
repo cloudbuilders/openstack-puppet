@@ -9,11 +9,6 @@ class dash::install {
   package { $dash_common_packages:
     ensure => latest
   }
-
-  package { openstackx:
-    ensure => latest,
-    notify => Service["apache2"]
-  }
   
   package { "django-openstack":
     ensure => latest,
