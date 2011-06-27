@@ -49,12 +49,12 @@ class nova-db::install {
   file { "secgroup.sql":
     path => "/var/lib/nova/secgroup.sql",
     require => Package['nova-common'],
-    source => "puppet:///modules/dash/000-default",
+    source => "puppet:///modules/nova-db/secgroup.sql",
     notify => Exec["create_default_secgroup"]
   }
   
   exec { "create_default_secgroup":
-    command     => "mysql -uroot -p${mysql_root_password} < /var/lib/nova/secgroup.sql",
+    command     => "mysql nova -uroot -p${mysql_root_password} < /var/lib/nova/secgroup.sql",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true,
     require     => File['secgroup.sql']
