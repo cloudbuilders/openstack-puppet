@@ -47,7 +47,7 @@ class nova-db::install {
   
   # FIXME(ja): hack to add a custom firewall set
   file { "secgroup.sql":
-    path => "/var/lib/nova/sql",
+    path => "/var/lib/nova/secgroup.sql",
     require => Package['nova-common'],
     source => "puppet:///modules/dash/000-default",
     notify => Exec["create_default_secgroup"]
