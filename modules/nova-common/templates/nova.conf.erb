@@ -36,6 +36,12 @@
 <% if has_variable?('fixed_range') -%>
 --fixed_range=<%= fixed_range %>
 <% end %>
+<% if has_variable?('floating_range') -%>
+--floating_range=<%= floating_range %>
+<% end %>
+<% if has_variable?('public_interface') -%>
+--public_interface=<%= public_interface %>
+<% end %>
 <% if has_variable?('dhcp_start') -%>
 --flat_network_dhcp_start=<%= dhcp_start %>
 <% end %>
