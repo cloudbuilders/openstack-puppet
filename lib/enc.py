@@ -102,7 +102,7 @@ for role, rolematch in cluster_details['cluster'].items():
 # Now generate the roles list
 enc_manifest = { 'classes': [], 'parameters': {} }
 
-print "looking for roles for %s" % hostname
+#print "looking for roles for %s" % hostname
 
 if not roles_by_machine.has_key(hostname):
     # not found..
