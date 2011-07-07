@@ -40,9 +40,9 @@ oskick_details = json.load(r)
 # the oskick data, but we don't have multi-tenant support
 # there yet, so we'll dummy it up
 
-hostname = sys.argv[1] #.split('.')[0]
+hostname = sys.argv[1].split('.')[0]
 
-machine_info = [x for x in oskick_details['hardware'] if x['hostname'] == hostname ]
+machine_info = [x for x in oskick_details['hardware'] if x['hostname'].split('.')[0] == hostname ]
 if not machine_info:
     print "Can't find machine info"
     sys.exit(1)
@@ -86,7 +86,7 @@ machines_by_role = {}
 
 for role, rolematch in cluster_details['cluster'].items():
     for hwinfo in oskick_details['hardware']:
-        host = hwinfo['hostname']
+        host = hwinfo['hostname'].split('.')[0]
 
         if host and re.match(rolematch, host):
             if not roles_by_machine.has_key(host):
@@ -119,7 +119,7 @@ for key, value in cluster_details['options'].items():
     if matchgroup:
         # return the ip of the node (or first match)
         matching_host = [ x['ip_address'] for x in oskick_details['hardware']
-                          if re.match(matchgroup.group(1),x['hostname']) ]
+                          if re.match(matchgroup.group(1),x['hostname'].split('.')[0]) ]
         if matching_host:
             new_value = matching_host[0]
 
