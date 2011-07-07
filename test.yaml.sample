@@ -16,9 +16,11 @@
     "root_password": "changeme",
     "root_authorized_keys": "ssh-dss AAAAV <snip> iwJD== foo@foo.bar.com",
 
+    "use_swauth": true,
     "swift_hash_suffix": "changeme",
     "swauth_allow_account_management": "false",
-    "swauth_super_admin_key": "changeme"
+    "swauth_super_admin_key": "changeme",
+    "swauth_endpoint": "http://#{swift-proxy-node}:8080/v1",
 
     "mysql_vip": "#{nova-infra}",
     "api_vip": "#{nova-infra}",
