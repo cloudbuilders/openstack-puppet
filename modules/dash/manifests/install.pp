@@ -75,6 +75,13 @@ class dash::install {
     ]
   }
 
+  # Enable mod_rewrite to allow the overlay of custom images and css
+  file {"/etc/apache2/mods-enabled/rewrite.load":
+    ensure => symlink,
+    target => "/etc/apache2/mods-available/rewrite.load",
+    notify => Service["apache2"]
+  }
+
   exec { "dash-db":
     command => "python /var/lib/dash/dashboard/manage.py syncdb",
     user => "www-data",
