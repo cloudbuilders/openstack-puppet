@@ -7,6 +7,10 @@ $additional_apt_repos = []
 
 $cluster_name="test"
 
+class one-vm-vlan {
+  include vm-vlan-network
+}
+
 class base-node {
   include ssh
   include sudo

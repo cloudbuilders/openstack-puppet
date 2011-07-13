@@ -1,7 +1,7 @@
-class host-network::install {
+class vm-vlan-network::install {
 
   file { "/etc/network/interfaces":
-    content => template("network/interfaces.erb"),
+    content => template("vm-vlan-network/interfaces.erb"),
     mode    => 0644,
     backup  => true,
     notify  => Exec["restart_network"]
