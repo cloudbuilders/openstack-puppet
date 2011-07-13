@@ -15,3 +15,4 @@ iface eth0 inet static
 
 auto eth0.<%= vm_vlan %>
 iface eth0.<%= vm_vlan %> inet manual
+        up ifconfig eth0.<%= vm_vlan %> up
