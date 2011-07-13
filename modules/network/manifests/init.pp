@@ -1,3 +1,3 @@
-class network {
-  include network::install
+class host-network {
+  include host-network::install
 }
