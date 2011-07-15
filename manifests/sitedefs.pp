@@ -14,6 +14,7 @@ class one-vm-vlan {
 class base-node {
   include ssh
   include sudo
+  include sysctl
   include ntp
   include apt  # additional repos only
 }
