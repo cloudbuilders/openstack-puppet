@@ -9,7 +9,7 @@
 --logdir=/var/log/nova
 --state_path=/var/lib/nova
 --lock_path=/var/lock/nova
---max_cores=32
+--max_cores=<%= has_variable?("max_cores") ? max_cores : 32 %>
 --max_gigabytes=128
 --quota_instances=1000
 --quota_cores=1000
