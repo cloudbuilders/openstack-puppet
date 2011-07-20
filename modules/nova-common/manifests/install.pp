@@ -1,9 +1,13 @@
 class nova-common::install {
   $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-eventlet", "python-mysqldb" ]
 
+  if !$package_repo {
+    $package_repo = "http://devpackages.ansolabs.com"
+  }
+
   # FIXME(ja): move this to rcb common, then glance, keystone, ... don't need to require nova common
   apt::source { "rcb":
-    location => "http://devpackages.ansolabs.com",
+    location => $package_repo,
     release => "maverick",
     repos => "main",
     key => "460DF9BE",
