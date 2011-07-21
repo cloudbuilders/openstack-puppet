@@ -15,9 +15,17 @@ class nova-common::install {
     pin => "1"
   }
 
+  apt::source { "nova-ppa":
+    location => "http://ppa.launchpad.net/nova-core/trunk/ubuntu",
+    release => "maverick",
+    repos => "main",
+    key => "2A2356C9",
+    key_server => "keyserver.ubuntu.com"
+  }
+
   package { $nova_common_packages:
     ensure  => latest,
-    require => Apt::Source["rcb"]
+    require => [Apt::Source["rcb"], Apt::Source["nova-ppa"]]
   }
   
   file { "nova-default":
