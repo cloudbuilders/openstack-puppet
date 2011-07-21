@@ -52,7 +52,7 @@ class dash::install {
     mode   => 0755
   }
 
-  file { "/var/lib/dash/dashboard/local/dashboard_openstack.sqlite3":
+  file { "/var/lib/dash/local/dashboard_openstack.sqlite3":
     owner  => "www-data",
     mode   => 0600
   }
