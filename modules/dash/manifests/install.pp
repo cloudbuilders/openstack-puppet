@@ -47,7 +47,7 @@ class dash::install {
     ]
   }
 
-  file { "/var/lib/dash/dashboard/local":
+  file { "/var/lib/dash/local":
     owner  => "www-data",
     mode   => 0755
   }
