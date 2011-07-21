@@ -13,8 +13,7 @@ class nova-vncproxy::install {
   }
 
   file { "/etc/init/nova-vncproxy.conf":
-    ensure => present,
-    content => template("nova-vncproxy/nova-vncproxy.py.erb"),
+    source  => "puppet:///modules/nova-vncproxy/nova-vncproxy.conf",
     notify => Service["nova-vncproxy"]
   }
 }
