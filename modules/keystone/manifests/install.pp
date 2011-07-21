@@ -3,6 +3,15 @@ class keystone::install {
   package { "keystone":
     ensure => present
   }
+
+  file { "keystone.conf":
+    path => "/etc/keystone/keystone.conf",
+    ensure  => present,
+    owner   => "keystone",
+    mode    => 0600,
+    content => template("keystone/keystone.conf.erb"),
+    notify => Service["keystone"]
+  }
   
   file { "initial_data.sh":
     path => "/var/lib/keystone/initial_data.sh",
