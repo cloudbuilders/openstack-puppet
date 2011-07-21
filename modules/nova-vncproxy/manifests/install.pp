@@ -15,6 +15,6 @@ class nova-vncproxy::install {
   file { "/etc/init/nova-vncproxy.conf":
     ensure => present,
     content => template("nova-vncproxy/nova-vncproxy.py.erb"),
-    notify => Service["nova-vncproxy"],
+    notify => Service["nova-vncproxy"]
   }
 }
