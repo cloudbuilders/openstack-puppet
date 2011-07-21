@@ -40,7 +40,7 @@ class nova-db::install {
 
   # FIXME(vish): 256 should be a config flag for network range?
   exec { "create_initial_network":
-    command     => "nova-manage network create ${fixed_range} 1 256",
+    command     => "nova-manage network create public ${fixed_range} 1 256",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true
   }
