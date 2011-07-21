@@ -48,8 +48,13 @@ class dash::install {
   }
 
   file { "/var/lib/dash/dashboard/local":
-    ensure => link,
-    target => "/var/lib/dash/local"
+    owner  => "www-data",
+    mode   => 0755
+  }
+
+  file { "/var/lib/dash/dashboard/local/dashboard_openstack.sqlite3":
+    owner  => "www-data",
+    mode   => 0755
   }
 
   file { "local_settings.py":
