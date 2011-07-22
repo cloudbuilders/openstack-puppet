@@ -16,7 +16,9 @@ class dash::install {
     require => [
       Package["libapache2-mod-wsgi"],
       Package["python-django"],
-      Package["apache2"]
+      Package["apache2"],
+      Package["keystone"],
+      Package["openstackx"]
     ]
   }
 

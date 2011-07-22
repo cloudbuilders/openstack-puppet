@@ -9,7 +9,9 @@ class nova-api::install {
     source  => "puppet:///modules/nova-api/api-paste.ini",
     ensure => present,
     require => [
-      Package["nova-api"]
+      Package["nova-api"],
+      Package["openstackx"],
+      Package["keystone"]
     ]
   }
 }
