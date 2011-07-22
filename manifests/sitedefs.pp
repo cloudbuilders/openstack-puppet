@@ -33,6 +33,9 @@ class nova-compute-node {
 class nova-infra-node {
   include nova-base-node
 
+  # common deps
+  include rcb-common
+
   # data services
   include rabbitmq
   include mysql::server

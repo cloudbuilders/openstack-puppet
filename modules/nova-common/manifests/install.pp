@@ -1,5 +1,5 @@
 class nova-common::install {
-  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-eventlet", "python-mysqldb" ]
+  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-mysqldb" ]
 
   package { $nova_common_packages:
     ensure  => latest,
