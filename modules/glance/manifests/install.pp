@@ -1,8 +1,12 @@
 class glance::install {
+
   $glance_packages = [ "glance", "python-glance" ]
 
   package { $glance_packages:
-    ensure => present
+    ensure => present,
+    require => [
+      Class["rcb-common"]
+    ]
   }
 
   file { "/var/log/glance":
@@ -14,8 +18,9 @@ class glance::install {
   file { "/var/log/glance/api.log":
     ensure => present,
     owner  => "glance",
-    mode   => "600",
+    mode   => 0600,
     require => File["/var/log/glance"]
   }
+
 }
   

@@ -3,7 +3,10 @@ class dash::install {
   $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi" ]
   
   package { "python-django":
-    ensure => "1.3-2"
+    ensure => "1.3-2",
+    require => [
+      Class["rcb-common"]
+    ]
   }
   
   package { $dash_common_packages:
@@ -26,7 +29,6 @@ class dash::install {
     ensure => latest,
     notify => Service["apache2"],
     require => [
-      Package["python-django"],
       Package["django-openstack"]
     ]
   }
@@ -91,7 +93,10 @@ class dash::install {
   file {"/etc/apache2/mods-enabled/rewrite.load":
     ensure => symlink,
     target => "/etc/apache2/mods-available/rewrite.load",
-    notify => Service["apache2"]
+    notify => Service["apache2"],
+    require => [
+      Package["apache2"]
+    ]
   }
 
   exec { "dash-db":

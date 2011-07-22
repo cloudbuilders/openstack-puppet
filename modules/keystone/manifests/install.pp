@@ -1,7 +1,10 @@
 class keystone::install {
 
   package { "keystone":
-    ensure => present
+    ensure => present,
+    require => [
+      Class["rcb-common"]
+    ]
   }
 
   file { "keystone.conf":
@@ -10,7 +13,8 @@ class keystone::install {
     owner   => "keystone",
     mode    => 0600,
     content => template("keystone/keystone.conf.erb"),
-    notify => Service["keystone"]
+    notify => Service["keystone"],
+    require => Package["keystone"]
   }
   
   file { "initial_data.sh":
