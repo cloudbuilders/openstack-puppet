@@ -26,6 +26,11 @@ class nova-base-node {
   include nova-common
 }
 
+class nova-network-node {
+  include nova-base-node
+  include nova-network
+}
+
 class nova-compute-node {
   include nova-base-node
   include nova-compute
@@ -43,7 +48,6 @@ class nova-infra-node {
 
   # openstack services
   include nova-api
-  include nova-network
   include nova-scheduler
   include nova-vncproxy
 
