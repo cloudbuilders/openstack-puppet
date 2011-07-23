@@ -5,14 +5,16 @@ class glance::install {
   package { $glance_packages:
     ensure => present,
     require => [
-      Class["rcb-common"]
+      Apt::Source["rcb"],
+      Package["nova-common"]
     ]
   }
 
   file { "/var/log/glance":
     ensure => directory,
     owner  => "glance",
-    mode   => 0755
+    mode   => 0755,
+    require => [Package["glance"], Package["python-glance"]]
   }
 
   file { "/var/log/glance/api.log":

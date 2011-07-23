@@ -1,7 +1,10 @@
 class nova-api::install {
 
   package { "nova-api":
-    ensure => latest
+    ensure => latest,
+    require => [
+      Apt::Source["rcb"]
+    ]
   }
 
   file { "api-paste.ini":

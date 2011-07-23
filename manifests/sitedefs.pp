@@ -22,6 +22,7 @@ class base-node {
 class nova-base-node {
   include cloudkick
   include base-node
+  include rcb-common
   include nova-common
 }
 
@@ -32,9 +33,6 @@ class nova-compute-node {
 
 class nova-infra-node {
   include nova-base-node
-
-  # common deps
-  include rcb-common
 
   # data services
   include rabbitmq

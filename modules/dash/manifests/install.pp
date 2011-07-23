@@ -5,7 +5,7 @@ class dash::install {
   package { "python-django":
     ensure => "1.3-2",
     require => [
-      Class["rcb-common"]
+      Apt::Source["rcb"]
     ]
   }
   
@@ -53,17 +53,26 @@ class dash::install {
 
   file { "/var/lib/dash/dashboard/local":
     ensure => link,
-    target => "/var/lib/dash/local"
+    target => "/var/lib/dash/local",
+    require => [
+      Package["openstack-dashboard"]
+    ]
   }
 
   file { "/var/lib/dash/local":
     owner  => "www-data",
-    mode   => 0755
+    mode   => 0755,
+    require => [
+      Package["openstack-dashboard"]
+    ]
   }
 
   file { "/var/lib/dash/local/dashboard_openstack.sqlite3":
     owner  => "www-data",
-    mode   => 0600
+    mode   => 0600,
+    require => [
+      Exec["dash-db"]
+    ]
   }
 
   file { "local_settings.py":

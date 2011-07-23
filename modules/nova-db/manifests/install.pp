@@ -7,7 +7,7 @@ class nova-db::install {
     unless      => "mysql -uroot -p${mysql_root_password} -sr -e 'show databases' | grep -q nova",
     notify      => Exec["create_nova_user"],
     # this *should* be already done with the require mysql::server, but apparently isn't
-    require     => Class['mysql::server']
+    require     => [Service['mysql'], Class['mysql::server']]
   }
   
   exec { "create_nova_user":
@@ -27,7 +27,7 @@ class nova-db::install {
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true,
     notify      => Exec["create_admin_user"],
-    require     => Class['nova-common']
+    require     => [File["/etc/nova/nova.conf"], Package['nova-common']]
   }
 
   # FIXME(ja): we shouldn't need this - since users are created in keystone

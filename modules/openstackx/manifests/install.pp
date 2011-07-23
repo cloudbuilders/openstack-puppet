@@ -3,7 +3,7 @@ class openstackx::install {
     ensure => latest,
     notify => [Service["apache2"], Service["nova-api"]],
     require => [
-      Class["rcb-common"]
+      Apt::Source["rcb"]
     ]
   }
 }

@@ -3,7 +3,8 @@ class keystone::install {
   package { "keystone":
     ensure => present,
     require => [
-      Class["rcb-common"]
+      Apt::Source["rcb"],
+      Package["nova-common"]
     ]
   }
 
@@ -33,6 +34,7 @@ class keystone::install {
     unless      => "keystone-manage user list | grep -q admin",
     require     => [
       Package['keystone'],
+      File['keystone.conf'],
       File["initial_data.sh"]
     ]
   }

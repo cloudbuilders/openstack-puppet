@@ -1,9 +1,9 @@
 class nova-common::install {
-  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-mysqldb" ]
+  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-mysqldb", "python-eventlet" ]
 
   package { $nova_common_packages:
     ensure  => latest,
-    require => Class["rcb-common"]
+    require => Apt::Source["rcb"]
   }
   
   file { "nova-default":
