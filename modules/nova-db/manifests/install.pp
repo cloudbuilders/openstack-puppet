@@ -1,6 +1,6 @@
 class nova-db::install {
   # we only have to install if there isn't a nova db
-  
+
   exec { "create_nova_db":
     command     => "mysql -uroot -p${mysql_root_password} -e 'create database nova'",
     path        => [ "/bin", "/usr/bin" ],
@@ -9,7 +9,7 @@ class nova-db::install {
     # this *should* be already done with the require mysql::server, but apparently isn't
     require     => [Service['mysql'], Class['mysql::server']]
   }
-  
+
   exec { "create_nova_user":
     # FIXME:
     # someone really need to get db access limited to just
@@ -40,11 +40,11 @@ class nova-db::install {
 
   # FIXME(vish): 256 should be a config flag for network range?
   exec { "create_initial_network":
-    command     => "nova-manage network create public ${fixed_range} 1 256",
+    command     => "nova-manage network create public ${fixed_range} 1 256 T",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true
   }
-  
+
   # FIXME(ja): hack to add a custom firewall set
   file { "secgroup.sql":
     path => "/var/lib/nova/secgroup.sql",
@@ -52,7 +52,7 @@ class nova-db::install {
     source => "puppet:///modules/nova-db/secgroup.sql",
     # notify => Exec["create_default_secgroup"]
   }
-  
+
   # exec { "create_default_secgroup":
   #   command     => "mysql nova -uroot -p${mysql_root_password} < /var/lib/nova/secgroup.sql",
   #   path        => [ "/bin", "/usr/bin" ],
@@ -60,4 +60,4 @@ class nova-db::install {
   #   require     => File['secgroup.sql']
   # }
 }
-  
+
