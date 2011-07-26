@@ -33,17 +33,17 @@ ignore_file \.pod$
 # network notation unless the perl module Net::CIDR is installed.  You
 # may repeat the allow line as many times as you'd like
 
-allow ^127\.0\.0\.1$
+#allow ^127\.0\.0\.1$
 
 # If you have installed the Net::CIDR perl module, you can use
 # multiple cidr_allow and cidr_deny address/mask patterns.  A
 # connecting client must match any cidr_allow, and not match any
 # cidr_deny.  Example:
 
-# cidr_allow 127.0.0.1/32
+cidr_allow <%= api_vip %>/32
+cidr_allow 127.0.0.1/32
 # cidr_allow 192.0.2.0/24
 # cidr_deny  192.0.2.42/32
-cidr_allow <%= api_vip %>/32
 
 # Which address to bind to;
 host *
