@@ -1,5 +1,5 @@
 class munin::install {
-  package { "munin-node":
+  package { "munin":
     ensure => present
   }
 }
