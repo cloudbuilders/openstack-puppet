@@ -1,9 +1,10 @@
 class glance::install {
 
-  $glance_packages = [ "glance", "python-glance" ]
+  # TODO: Remove python-xattr once it is in glance packaging
+  $glance_packages = [ "glance", "python-glance", "python-xattr" ]
 
   package { $glance_packages:
-    ensure => present,
+    ensure => latest,
     require => [
       Apt::Source["rcb"],
       Package["nova-common"]

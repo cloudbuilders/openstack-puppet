@@ -1,7 +1,7 @@
 class keystone::install {
 
   package { "keystone":
-    ensure => present,
+    ensure => latest,
     require => [
       Apt::Source["rcb"],
       Package["nova-common"]
