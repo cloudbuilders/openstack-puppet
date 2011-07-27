@@ -16,7 +16,7 @@ class base-node {
   include sudo
   include sysctl
   include ntp
-  include munin
+  include munin-node
   include apt  # additional repos only
 }
 
