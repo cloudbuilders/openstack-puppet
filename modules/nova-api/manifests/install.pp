@@ -3,7 +3,10 @@ class nova-api::install {
   package { "nova-api":
     ensure => latest,
     require => [
-      Apt::Source["rcb"]
+      Apt::Source["rcb"],
+      Package["nova-common"],
+      Package["openstackx"],
+      Package["keystone"]
     ]
   }
 
@@ -12,9 +15,7 @@ class nova-api::install {
     source  => "puppet:///modules/nova-api/api-paste.ini",
     ensure => present,
     require => [
-      Package["nova-api"],
-      Package["openstackx"],
-      Package["keystone"]
+      Package["nova-api"]
     ]
   }
 }

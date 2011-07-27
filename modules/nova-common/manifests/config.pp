@@ -5,7 +5,6 @@ class nova-common::config {
     owner   => "root",
     group   => "nogroup",
     mode    => 0660,
-    content => template("nova-common/nova.conf.erb"),
-    require => Class["nova-common::install"]
+    content => template("nova-common/nova.conf.erb")
   }
 }
