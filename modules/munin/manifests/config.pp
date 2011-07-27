@@ -1,11 +1,10 @@
 class munin::config {
-  file { "/etc/munin/munin-node.conf":
+  file { "/etc/munin/apache.conf":
     ensure  => present,
     owner   => "root",
     group   => "root",
     mode    => "644",
-    content => template("munin/munin-node.conf.erb"),
+    content => template("munin/apache.conf.erb"),
     require => Class["munin::install"],
-    notify  => Class["munin::service"],
   }
 }

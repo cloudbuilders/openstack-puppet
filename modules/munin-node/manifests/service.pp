@@ -1,7 +1,7 @@
-class munin::service {
+class munin-node::service {
   service { "munin-node":
     ensure  => running,
     enable  => true,
-    require => Class["munin::config"]
+    require => Class["munin-node::config"]
   }
 }

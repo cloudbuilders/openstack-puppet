@@ -16,7 +16,7 @@ class base-node {
   include sudo
   include sysctl
   include ntp
-  include munin
+  include munin-node
   include apt  # additional repos only
 }
 
@@ -39,6 +39,7 @@ class nova-compute-node {
 
 class nova-infra-node {
   include nova-base-node
+  include munin
 
   # data services
   include rabbitmq
