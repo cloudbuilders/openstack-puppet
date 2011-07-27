@@ -5,6 +5,7 @@ class glance::install {
 
   package { $glance_packages:
     ensure => latest,
+    notify => [Service["apache2"], Service["nova-api"]],
     require => [
       Apt::Source["rcb"],
       Package["nova-common"]
