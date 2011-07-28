@@ -23,7 +23,7 @@ class nova-db::install {
 
   # this is all totally brute force
   exec { "sync_nova_db":
-    command     => "nova-manage db sync",
+    command     => "sudo -u nova nova-manage db sync",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true,
     notify      => Exec["create_admin_user"],
@@ -32,7 +32,7 @@ class nova-db::install {
 
   # FIXME(ja): we shouldn't need this - since users are created in keystone
   exec { "create_admin_user":
-    command     => "nova-manage user admin ${nova_admin_user} ${nova_admin_password}",
+    command     => "sudo -u nova nova-manage user admin ${nova_admin_user} ${nova_admin_password}",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true,
     notify      => Exec["create_initial_network"]
@@ -40,7 +40,7 @@ class nova-db::install {
 
   # FIXME(vish): 256 should be a config flag for network range?
   exec { "create_initial_network":
-    command     => "nova-manage network create private ${fixed_range} 1 256 T",
+    command     => "sudo -u nova nova-manage network create private ${fixed_range} 1 256 T",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true
   }
