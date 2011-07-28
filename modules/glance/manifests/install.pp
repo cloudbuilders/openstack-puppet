@@ -3,6 +3,10 @@ class glance::install {
   # TODO: Remove python-xattr once it is in glance packaging
   $glance_packages = [ "glance", "python-glance" ]
 
+  package { "python-xattr":
+    ensure => present
+  }
+
   package { $glance_packages:
     ensure => latest,
     notify => [Service["apache2"], Service["nova-api"]],
