@@ -3,7 +3,7 @@ class nova-common::install {
 
   package { $nova_common_packages:
     ensure  => latest,
-    require => [Apt::Source["rcb"], File["/etc/nova/nova.conf"]]
+    require => Apt::Source["rcb"]
   }
   
   file { "nova-default":

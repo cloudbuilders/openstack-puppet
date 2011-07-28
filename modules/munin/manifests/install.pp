@@ -1,9 +1,6 @@
 class munin::install {
   package { "munin":
-    ensure => present,
-    require => [
-      Service["apache2"]
-    ],
+    ensure => present
   }
 
   file { "/etc/apache2/conf.d/munin":
