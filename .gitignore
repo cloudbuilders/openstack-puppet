@@ -1,3 +1,9 @@
 *\.yaml
 *~
 manifests/site.pp
+autosign.conf
+clusters
+hosts
+node_classes.py
+puppet.conf
+ssl
