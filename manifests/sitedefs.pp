@@ -15,7 +15,7 @@ class base-node {
 }
 
 class nova-base-node {
-  include cloudkick
+#  include cloudkick
   include base-node
   include nova-common
 }
@@ -45,6 +45,26 @@ class nova-infra-node {
   include dash
   include keystone
   include openstackx
+}
+
+class nova-infra-ha-primary {
+  $use_ha = true
+  $ha_primary = true
+  $ha_initial_setup = true
+  include drbd
+  include mysql::server
+  include rabbitmq
+#  include nova-infra-node
+}
+
+class nova-infra-ha-secondary {
+  $use_ha = true
+  $ha_primary = false
+  $ha_initial_setup = true
+  include drbd
+  include mysql::server
+  include rabbitmq
+#  include nova-infra-node
 }
 
 class swift-common-node {

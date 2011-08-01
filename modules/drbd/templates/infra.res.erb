@@ -1,0 +1,30 @@
+resource infra0 {
+  protocol C;
+  startup {
+    wfc-timeout 15;
+    degr-wfc-timeout 60;
+  }
+
+  net {
+    cram-hmac-alg sha1;
+    shared-secret "secret";
+  }
+
+  on <%= infra_ha_primary %> {
+    device /dev/drbd0;
+    disk /dev/vg0/drbd;
+    address <%= infra_ha_primary_ip %>:7788;
+    meta-disk internal;
+  }
+
+  on <%= infra_ha_secondary %> {
+    device /dev/drbd0;
+    disk /dev/vg0/drbd;
+    address <%= infra_ha_secondary_ip %>:7788;
+    meta-disk internal;
+  }
+}
+
+
+    
+	     

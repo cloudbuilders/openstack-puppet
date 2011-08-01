@@ -106,6 +106,7 @@ enc_manifest = { 'classes': [], 'parameters': {} }
 
 if not roles_by_machine.has_key(hostname):
     # not found..
+    print roles_by_machine
     print "No roles!"
     sys.exit(1)
 

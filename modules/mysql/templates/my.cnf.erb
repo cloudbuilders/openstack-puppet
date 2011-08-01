@@ -43,7 +43,7 @@ user		= mysql
 socket		= /var/run/mysqld/mysqld.sock
 port		= 3306
 basedir		= /usr
-datadir		= /var/lib/mysql
+datadir		= <% if $use_ha %>/drbd/mysql<% else %>/var/lib/mysql<% end %>
 tmpdir		= /tmp
 skip-external-locking
 #
