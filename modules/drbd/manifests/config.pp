@@ -62,8 +62,7 @@ class drbd::config {
       command     => 'mke2fs -j /dev/drbd0',
       path        => '/usr/bin:/usr/sbin:/bin:/sbin',
       refreshonly => true,
-      require     => File['/usr/local/bin/drbd-migrate-data.sh'],
-      notify      => Exec['drbd-migrate-data']
+      require     => File['/usr/local/bin/drbd-migrate-data.sh']
     }
 
     file { '/usr/local/bin/drbd-migrate-data.sh':
@@ -72,12 +71,6 @@ class drbd::config {
       group   => 'root',
       mode    => 0755,
       source  => 'puppet:///modules/drbd/drbd-migrate-data.sh'
-    }
-
-    exec { 'drbd-migrate-data':
-      command     => '/usr/local/bin/drbd-migrate-data.sh',
-      path        => '/usr/bin:/usr/sbin:/bin:/sbin',
-      refreshonly => true
     }
   }
 
@@ -89,7 +82,14 @@ class drbd::config {
       ensure  => mounted,
       fstype  => "auto",
       options => "defaults",
+      notify  => Exec['drbd-migrate-data'],
       require => File["/drbd"]
+    }
+
+    exec { 'drbd-migrate-data':
+      command     => '/usr/local/bin/drbd-migrate-data.sh',
+      path        => '/usr/bin:/usr/sbin:/bin:/sbin',
+      refreshonly => true
     }
 
     # turn up the VIP -- this probably doesn't go here

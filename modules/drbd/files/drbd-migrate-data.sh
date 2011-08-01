@@ -11,7 +11,7 @@ if [ -d /var/lib/mysql -a ! -d /drbd/mysql ]; then
 
     cd /var/lib
     tar -cf - mysql | tar -C /drbd -xf -
-    mv /var/lib/mysql /var/lib/mysql.old
+    mv /var/lib/mysql /var/lib/mysql.`date +%Y%m%d`
     ln -s /drbd/mysql /var/lib/mysql
 
     if [ -f /tmp/restart.mysql ]; then
@@ -20,15 +20,10 @@ if [ -d /var/lib/mysql -a ! -d /drbd/mysql ]; then
     fi
 fi
 
-if [ -d /var/lib/mysql -a ! -L /var/lib/mysql ]; then
-    mv /var/lib/mysql /var/lib/mysql.`date +%Ymd`
+if [ -d /drbd/mysql -a ! -L /var/lib/mysql ]; then
+    mv /var/lib/mysql /var/lib/mysql.`date +%Y%m%d`
     ln -s /drbd/mysql /var/lib/mysql
 fi
-
-if [ ! -d /drbd/mysql ]; then
-    mkdir /drbd/mysql
-fi
-
 
 # move the rabbit data
 if [ -d /var/lib/rabbitmq -a ! -d /drbd/rabbitmq ]; then
@@ -41,7 +36,7 @@ if [ -d /var/lib/rabbitmq -a ! -d /drbd/rabbitmq ]; then
 
     cd /var/lib
     tar -cf - rabbitmq | tar -C /drbd -xf -
-    mv /var/lib/rabbitmq /var/lib/rabbitmq.old
+    mv /var/lib/rabbitmq /var/lib/rabbitmq.`date +%Y%m%d`
     ln -s /drbd/rabbitmq /var/lib/rabbitmq
 
     if [ -f /tmp/restart.rabbitmq ]; then
@@ -50,11 +45,8 @@ if [ -d /var/lib/rabbitmq -a ! -d /drbd/rabbitmq ]; then
     fi
 fi
 
-if [ -d /var/lib/rabbitmq -a ! -L /var/lib/rabbitmq ]; then
-    mv /var/lib/rabbitmq /var/lib/rabbitmq.`date +%Ymd`
+if [ -d /drbd/rabbitmq -a ! -L /var/lib/rabbitmq ]; then
+    mv /var/lib/rabbitmq /var/lib/rabbitmq.`date +%Y%m%d`
     ln -s /drbd/rabbitmq /var/lib/rabbitmq
 fi
 
-if [ ! -d /drbd/rabbitmq ]; then
-    mkdir /drbd/rabbitmq
-fi
