@@ -17,9 +17,10 @@ class mysql::install {
     require => Group['mysql']
   }
     
-  preseed_package { "mysql-server":
-    ensure => present,
-    source => "mysql/mysql-preseed.erb"
+  preseed_package { 'mysql-server'
+    ensure  => present,
+    require => User['mysql'],
+    source  => 'mysql/mysql-preseed.erb'
   }
 }
   
