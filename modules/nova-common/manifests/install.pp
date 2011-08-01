@@ -1,15 +1,5 @@
 class nova-common::install {
-  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-eventlet", "python-mysqldb" ]
-
-  # FIXME(ja): move this to rcb common, then glance, keystone, ... don't need to require nova common
-  apt::source { "rcb":
-    location => "http://devpackages.ansolabs.com",
-    release => "maverick",
-    repos => "main",
-    key => "460DF9BE",
-    key_server => "keyserver.ubuntu.com",
-    pin => "1"
-  }
+  $nova_common_packages = [ "nova-common", "nova-doc", "python-nova", "python-mysqldb", "python-eventlet" ]
 
   package { $nova_common_packages:
     ensure  => latest,
@@ -21,5 +11,4 @@ class nova-common::install {
     content => "ENABLED=1",
     require => Package["nova-common"]
   }
-
 }

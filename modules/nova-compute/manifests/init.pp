@@ -7,7 +7,8 @@ class nova-compute {
     ensure  => present,
     owner   => root,
     group   => kvm,
-    mode    => 0775
+    mode    => 0775,
+    require => Package["nova-compute"]
   }
   
   # LIBVIRT adds a default network ... we need to kill it!

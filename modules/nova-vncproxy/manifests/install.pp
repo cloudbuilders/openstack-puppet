@@ -4,11 +4,21 @@ class nova-vncproxy::install {
   package { "nova-vncproxy":
     ensure => latest,
     require => [
-      Package["nova-novnc"]
+      Apt::Source["rcb"],
+      Package["nova-novnc"],
     ]
   }
 
   package { "nova-novnc":
-    ensure => latest
+    ensure => latest,
+    notify => Service["nova-vncproxy"],
+    require => [
+      Apt::Source["rcb"],
+    ]
+  }
+
+  file { "/etc/init/nova-vncproxy.conf":
+    source  => "puppet:///modules/nova-vncproxy/nova-vncproxy.conf",
+    notify => Service["nova-vncproxy"]
   }
 }

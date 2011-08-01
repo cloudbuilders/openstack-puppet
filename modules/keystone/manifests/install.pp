@@ -1,7 +1,22 @@
 class keystone::install {
 
   package { "keystone":
-    ensure => present
+    ensure => latest,
+    notify => [Service["apache2"], Service["nova-api"]],
+    require => [
+      Apt::Source["rcb"],
+      Package["nova-common"]
+    ]
+  }
+
+  file { "keystone.conf":
+    path => "/etc/keystone/keystone.conf",
+    ensure  => present,
+    owner   => "keystone",
+    mode    => 0600,
+    content => template("keystone/keystone.conf.erb"),
+    notify => Service["keystone"],
+    require => Package["keystone"]
   }
   
   file { "initial_data.sh":
@@ -20,6 +35,7 @@ class keystone::install {
     unless      => "keystone-manage user list | grep -q admin",
     require     => [
       Package['keystone'],
+      File['keystone.conf'],
       File["initial_data.sh"]
     ]
   }

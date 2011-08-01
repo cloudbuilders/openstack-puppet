@@ -7,17 +7,29 @@ $additional_apt_repos = []
 
 $cluster_name="test"
 
+class one-vm-vlan {
+  include vm-vlan-network
+}
+
 class base-node {
   include ssh
   include sudo
+  include sysctl
   include ntp
+  include munin-node
   include apt  # additional repos only
 }
 
 class nova-base-node {
 #  include cloudkick
   include base-node
+  include rcb-common
   include nova-common
+}
+
+class nova-network-node {
+  include nova-base-node
+  include nova-network
 }
 
 class nova-compute-node {
@@ -27,6 +39,8 @@ class nova-compute-node {
 
 class nova-infra-node {
   include nova-base-node
+  include munin
+  include munin-node-infra
 
   # data services
   include rabbitmq
@@ -37,7 +51,6 @@ class nova-infra-node {
 
   # openstack services
   include nova-api
-  include nova-network
   include nova-scheduler
   include nova-vncproxy
 

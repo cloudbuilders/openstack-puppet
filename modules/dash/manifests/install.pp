@@ -3,7 +3,10 @@ class dash::install {
   $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi" ]
   
   package { "python-django":
-    ensure => "1.3-2"
+    ensure => "1.3-2",
+    require => [
+      Apt::Source["rcb"]
+    ]
   }
   
   package { $dash_common_packages:
@@ -16,7 +19,9 @@ class dash::install {
     require => [
       Package["libapache2-mod-wsgi"],
       Package["python-django"],
-      Package["apache2"]
+      Package["apache2"],
+      Package["keystone"],
+      Package["openstackx"]
     ]
   }
 
@@ -24,7 +29,6 @@ class dash::install {
     ensure => latest,
     notify => Service["apache2"],
     require => [
-      Package["python-django"],
       Package["django-openstack"]
     ]
   }
@@ -49,7 +53,26 @@ class dash::install {
 
   file { "/var/lib/dash/dashboard/local":
     ensure => link,
-    target => "/var/lib/dash/local"
+    target => "/var/lib/dash/local",
+    require => [
+      Package["openstack-dashboard"]
+    ]
+  }
+
+  file { "/var/lib/dash/local":
+    owner  => "www-data",
+    mode   => 0755,
+    require => [
+      Package["openstack-dashboard"]
+    ]
+  }
+
+  file { "/var/lib/dash/local/dashboard_openstack.sqlite3":
+    owner  => "www-data",
+    mode   => 0600,
+    require => [
+      Exec["dash-db"]
+    ]
   }
 
   file { "local_settings.py":
@@ -72,6 +95,16 @@ class dash::install {
       Package["apache2"],
       Exec["dash-db"],
       File["django.wsgi"]
+    ]
+  }
+
+  # Enable mod_rewrite to allow the overlay of custom images and css
+  file {"/etc/apache2/mods-enabled/rewrite.load":
+    ensure => symlink,
+    target => "/etc/apache2/mods-available/rewrite.load",
+    notify => Service["apache2"],
+    require => [
+      Package["apache2"]
     ]
   }
 

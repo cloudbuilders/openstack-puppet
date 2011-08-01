@@ -1,7 +1,13 @@
 class nova-api::install {
 
   package { "nova-api":
-    ensure => latest
+    ensure => latest,
+    require => [
+      Apt::Source["rcb"],
+      Package["nova-common"],
+      Package["openstackx"],
+      Package["keystone"]
+    ]
   }
 
   file { "api-paste.ini":

@@ -27,7 +27,7 @@ auth_handler.add_password(realm = 'kick dingus',
                           uri = config['kick_uri'],
                           user = config['kick_user'],
                           passwd = config['kick_pass'])
-                          
+
 opener = urllib2.build_opener(auth_handler)
 urllib2.install_opener(opener)
 
@@ -46,7 +46,7 @@ machine_info = [x for x in oskick_details['hardware'] if x['hostname'].split('.'
 if not machine_info:
     print "Can't find machine info"
     sys.exit(1)
-    
+
 cluster_id = machine_info[0]['cluster_id']
 
 # now, pull the short name of the cluster
@@ -98,7 +98,7 @@ for role, rolematch in cluster_details['cluster'].items():
 
             if host not in machines_by_role[role]:
                 machines_by_role[role].append(host)
-            
+
 # Now generate the roles list
 enc_manifest = { 'classes': [], 'parameters': {} }
 
