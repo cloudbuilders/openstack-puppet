@@ -1,5 +1,11 @@
 class munin-nova::config {
 
+  file {"/etc/munin/plugin-conf.d/nova":
+    content => template("munin-nova/nova.conf.erb"),
+    ensure => present,
+    notify => Service["munin-node"],
+  }
+
   file {"keystone_stats":
     path => "/usr/share/munin/plugins/keystone_stats",
     source => "puppet:///modules/munin-nova/keystone_stats",
