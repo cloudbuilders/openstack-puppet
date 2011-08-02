@@ -1,52 +1,41 @@
 #!/bin/bash
 
-# move the mysql data
-if [ -d /var/lib/mysql -a ! -d /drbd/mysql ]; then
-    rm -f /tmp/restart.mysql 
+# $1 = path to data
+# $2 = service to potentially restart
+function migrate_dir() {
+    tmpdir=`mktemp -d`
 
-    if [ `ps auxw | grep [m]ysql | wc -l` -gt 0 ]; then
-	/etc/init.d/mysql stop
-	touch /tmp/restart.mysql
+    if [ "$2" != "" ]; then
+	if ( /etc/init.d/$2 status > /dev/null 2>&1 ); then
+	    touch ${tmpdir}/restart.service
+	fi
     fi
 
-    cd /var/lib
-    tar -cf - mysql | tar -C /drbd -xf -
-    mv /var/lib/mysql /var/lib/mysql.`date +%Y%m%d`
-    ln -s /drbd/mysql /var/lib/mysql
+    # move the actual data
+    basename=`basename $1`
 
-    if [ -f /tmp/restart.mysql ]; then
-	/etc/init.d/mysql start
-	rm -f /tmp/restart.mysql
-    fi
-fi
+    if [ -d "$1" -a ! -d "/drbd/$basename" ]; then
+	if [ -f ${tmpdir}/restart.service ]; then
+	    /etc/init.d/$2 stop > /dev/null 2>&1
+	fi
 
-if [ -d /drbd/mysql -a ! -L /var/lib/mysql ]; then
-    mv /var/lib/mysql /var/lib/mysql.`date +%Y%m%d`
-    ln -s /drbd/mysql /var/lib/mysql
-fi
+	# start moving the data
+	cd `dirname $1`
+	tar -cf - ${basename} | tar -C /drbd -xf -
 
-# move the rabbit data
-if [ -d /var/lib/rabbitmq -a ! -d /drbd/rabbitmq ]; then
-    rm -f /tmp/restart.rabbitmq 
+	mv $1 $1.`date +%Y%m%d`
+	ln -s /drbd/${basename} $1
 
-    if [ `ps auxw | grep [r]abbit | wc -l` -gt 0 ]; then
-	/etc/init.d/rabbitmq-server stop
-	touch /tmp/restart.rabbitmq
+	if [ -f ${tmpdir}/restart.service ]; then
+	    /etc/init.d/$2 start > /dev/null 2>&1
+	fi
     fi
 
-    cd /var/lib
-    tar -cf - rabbitmq | tar -C /drbd -xf -
-    mv /var/lib/rabbitmq /var/lib/rabbitmq.`date +%Y%m%d`
-    ln -s /drbd/rabbitmq /var/lib/rabbitmq
+    rm -rf ${tmpdir}
+}
 
-    if [ -f /tmp/restart.rabbitmq ]; then
-	/etc/init.d/rabbitmq-server start
-	rm -f /tmp/restart.rabbitmq
-    fi
-fi
-
-if [ -d /drbd/rabbitmq -a ! -L /var/lib/rabbitmq ]; then
-    mv /var/lib/rabbitmq /var/lib/rabbitmq.`date +%Y%m%d`
-    ln -s /drbd/rabbitmq /var/lib/rabbitmq
-fi
-
+# Start moving the service data
+migrate_dir /var/lib/mysql mysql
+migrate_dir /var/lib/rabbitmq rabbitmq-server
+migrate_dir /var/lib/glance glance-api
+migrate_dir /var/lib/keystone keystone

@@ -66,11 +66,12 @@ class drbd::config {
     }
 
     file { '/usr/local/bin/drbd-migrate-data.sh':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => 0755,
-      source  => 'puppet:///modules/drbd/drbd-migrate-data.sh'
+      ensure      => present,
+      owner       => 'root',
+      group       => 'root',
+      mode        => 0755,
+      refreshonly => true,
+      source      => 'puppet:///modules/drbd/drbd-migrate-data.sh'
     }
   }
 
