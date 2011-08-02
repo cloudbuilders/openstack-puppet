@@ -33,6 +33,7 @@ class nova-network-node {
 }
 
 class nova-compute-node {
+  include munin-node-compute
   include nova-base-node
   include nova-compute
 }
