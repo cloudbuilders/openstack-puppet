@@ -36,15 +36,15 @@ class munin-nova::config {
     notify => Service["munin-node"],
   }
 
-  file {"nova_instance_states":
-    path => "/usr/share/munin/plugins/nova_instance_states",
-    source => "puppet:///modules/munin-nova/nova_instance_states",
+  file {"nova_instance_":
+    path => "/usr/share/munin/plugins/nova_instance_",
+    source => "puppet:///modules/munin-nova/nova_instance_",
     ensure => present,
   }
 
   file {"/etc/munin/plugins/nova_instance_states":
     ensure => symlink,
-    target => "/usr/share/munin/plugins/nova_instance_states",
+    target => "/usr/share/munin/plugins/nova_instance_",
     notify => Service["munin-node"],
   }
 
