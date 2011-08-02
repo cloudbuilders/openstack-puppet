@@ -1,4 +1,4 @@
-class munin-node-infra::config {
+class munin-node-compute::config {
   file {"/etc/munin/plugins/libvirt-blkstat":
     ensure => symlink,
     target => "/usr/share/munin/plugins/libvirt-blkstat",
