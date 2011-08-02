@@ -41,6 +41,7 @@ class nova-infra-node {
   include nova-base-node
   include munin
   include munin-node-infra
+  include munin-nova
 
   # data services
   include rabbitmq
