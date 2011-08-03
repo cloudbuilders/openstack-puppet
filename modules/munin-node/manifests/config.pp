@@ -9,6 +9,9 @@ class munin-node::config {
     notify  => Class["munin-node::service"],
   }
 
+
+  # Plugin links
+  
   file {"/etc/munin/plugins/cpu":
     ensure => symlink,
     target => "/usr/share/munin/plugins/cpu",
@@ -157,6 +160,51 @@ class munin-node::config {
   file {"/etc/munin/plugins/vmstat":
     ensure => symlink,
     target => "/usr/share/munin/plugins/vmstat",
+    notify => Service["munin-node"],
+  }
+
+
+  # IPMI plugin
+
+  file {"ipmi.modprobe":
+    path => "/etc/modprobe.d/ipmi.conf",
+    source => "puppet:///modules/munin-node/ipmi.modprobe",
+    ensure => present,
+  }
+
+  file {"ipmi_sdr_":
+    path => "/usr/share/munin/plugins/ipmi_sdr_",
+    source => "puppet:///modules/munin-node/ipmi_sdr_",
+    ensure => present,
+  }
+
+  file {"/etc/munin/plugin-conf.d/ipmi_sdr":
+    content => template("munin-node/ipmi_sdr.conf.erb"),
+    ensure => present,
+    notify => Service["munin-node"],
+  }
+
+  file {"/etc/munin/plugins/ipmi_sdr_current":
+    ensure => symlink,
+    target => "/usr/share/munin/plugins/ipmi_sdr_",
+    notify => Service["munin-node"],
+  }
+
+  file {"/etc/munin/plugins/ipmi_sdr_fan":
+    ensure => symlink,
+    target => "/usr/share/munin/plugins/ipmi_sdr_",
+    notify => Service["munin-node"],
+  }
+
+  file {"/etc/munin/plugins/ipmi_sdr_temperature":
+    ensure => symlink,
+    target => "/usr/share/munin/plugins/ipmi_sdr_",
+    notify => Service["munin-node"],
+  }
+
+  file {"/etc/munin/plugins/ipmi_sdr_voltage":
+    ensure => symlink,
+    target => "/usr/share/munin/plugins/ipmi_sdr_",
     notify => Service["munin-node"],
   }
 }
