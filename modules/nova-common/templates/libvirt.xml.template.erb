@@ -1,0 +1,156 @@
+<domain type='${type}'>
+    <name>${name}</name>
+    <memory>${memory_kb}</memory>
+    <os>
+#if $type == 'lxc'
+    #set $disk_prefix = ''
+    #set $disk_bus = ''
+        <type>exe</type>
+        <init>/sbin/init</init>
+#else if $type == 'uml'
+    #set $disk_prefix = 'ubd'
+    #set $disk_bus = 'uml'
+        <type>uml</type>
+        <kernel>/usr/bin/linux</kernel>
+        <root>/dev/ubda</root>
+#else
+    #if $type == 'xen'
+        #set $disk_prefix = 'sd'
+        #set $disk_bus = 'scsi'
+            <type>linux</type>
+            <root>/dev/xvda</root>
+    #else
+        #set $disk_prefix = 'vd'
+        #set $disk_bus = 'virtio'
+            <type>hvm</type>
+    #end if
+    #if $getVar('rescue', False)
+        <kernel>${basepath}/kernel.rescue</kernel>
+        <initrd>${basepath}/ramdisk.rescue</initrd>
+    #else
+        #if $getVar('kernel', None)
+            <kernel>${kernel}</kernel>
+            #if $type == 'xen'
+                <cmdline>ro</cmdline>
+            #else
+                <cmdline>root=/dev/vda console=ttyS0</cmdline>
+            #end if
+            #if $getVar('ramdisk', None)
+                <initrd>${ramdisk}</initrd>
+            #end if
+        #else
+            <boot dev="hd" />
+        #end if
+    #end if
+#end if
+    </os>
+    <features>
+        <acpi/>
+    </features>
+    <vcpu>${vcpus}</vcpu>
+    <devices>
+#if $type == 'lxc'
+        <filesystem type='mount'>
+            <source dir='${basepath}/rootfs'/>
+            <target dir='/'/>
+        </filesystem>
+#else
+    #if $getVar('rescue', False)
+        <disk type='file'>
+            <driver type='${driver_type}'/>
+            <source file='${basepath}/disk.rescue'/>
+            <target dev='${disk_prefix}a' bus='${disk_bus}'/>
+        </disk>
+        <disk type='file'>
+            <driver type='${driver_type}'/>
+            <source file='${basepath}/disk'/>
+            <target dev='${disk_prefix}b' bus='${disk_bus}'/>
+        </disk>
+    #else
+        #if not ($getVar('ebs_root', False))
+        <disk type='file'>
+            <driver type='${driver_type}'/>
+            <source file='${basepath}/disk'/>
+            <target dev='${disk_prefix}a' bus='${disk_bus}'/>
+        </disk>
+        #end if
+        #if $getVar('local', False)
+            <disk type='file'>
+                <driver type='${driver_type}'/>
+                <source file='${basepath}/disk.local'/>
+                <target dev='${disk_prefix}b' bus='${disk_bus}'/>
+            </disk>
+        #end if
+        #for $vol in $volumes
+            <disk type='${vol.type}'>
+                <driver type='raw'/>
+                #if $vol.type == 'network'
+                <source protocol='${vol.protocol}' name='${vol.name}'/>
+                #else
+                <source dev='${vol.device_path}'/>
+                #end if
+                <target dev='${vol.mount_device}' bus='${disk_bus}'/>
+            </disk>
+        #end for
+    #end if
+#end if
+
+#for $nic in $nics
+    #if $vif_type == 'ethernet'
+        <interface type='ethernet'>
+            <target dev='${nic.name}' />
+            <mac address='${nic.mac_address}' />
+            <script path='${nic.script}' />
+        </interface>
+    #else if $vif_type == '802.1Qbh'
+       <interface type='direct'>
+            <mac address='${nic.mac_address}'/>
+            <source dev='${nic.device_name}' mode='private'/>
+            <virtualport type='802.1Qbh'>
+                <parameters profileid='${nic.profile_name}'/>
+            </virtualport>
+            <model type='virtio'/>
+       </interface>
+    #else
+        <interface type='bridge'>
+            <source bridge='${nic.bridge_name}'/>
+            <mac address='${nic.mac_address}'/>
+	    <% if has_variable?("use_virtio_net") and use_virtio_net then %>
+            <model type='virtio'/>
+	    <% end -%>
+            
+            <filterref filter="nova-instance-${name}-${nic.id}">
+                <parameter name="IP" value="${nic.ip_address}" />
+                <parameter name="DHCPSERVER" value="${nic.dhcp_server}" />
+#if $getVar('nic.extra_params', False)
+                ${nic.extra_params}
+#end if
+#if $getVar('nic.gateway_v6', False)
+                <parameter name="RASERVER" value="${nic.gateway_v6}" />
+#end if
+            </filterref>
+        </interface>
+    #end if
+
+#end for
+        <!-- The order is significant here.  File must be defined first -->
+        <serial type="file">
+            <source path='${basepath}/console.log'/>
+            <target port='1'/>
+        </serial>
+
+        <console type='pty' tty='/dev/pts/2'>
+            <source path='/dev/pts/2'/>
+            <target port='0'/>
+        </console>
+
+        <serial type='pty'>
+            <source path='/dev/pts/2'/>
+            <target port='0'/>
+        </serial>
+
+#if $getVar('vncserver_host', False)
+        <graphics type='vnc' port='-1' autoport='yes' keymap='${vnc_keymap}' listen='${vncserver_host}'/>
+#end if
+    </devices>
+</domain>
