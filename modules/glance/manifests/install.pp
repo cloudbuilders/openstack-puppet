@@ -1,5 +1,4 @@
 class glance::install {
-
   # TODO: Remove python-xattr once it is in glance packaging
   $glance_packages = [ "glance", "python-glance" ]
 
@@ -7,13 +6,23 @@ class glance::install {
     ensure => present
   }
 
+  # ha configs require synced uid/gid
+  user { "glance":
+    ensure  => present,
+    uid     => 504,
+    gid     => 65534,
+    home    => "/var/lib/glance",
+    shell   => "/bin/false"
+  }
+  
   package { $glance_packages:
     ensure => latest,
     notify => [Service["apache2"], Service["nova-api"]],
     require => [
       Apt::Source["rcb"],
       Package["nova-common"],
-      Package["python-xattr"]
+      Package["python-xattr"],
+      User["glance"]
     ]
   }
 

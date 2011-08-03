@@ -1,11 +1,21 @@
 class keystone::install {
 
+  # ha configs require a synced uid
+  user { "keystone":
+    ensure  => present,
+    uid     => 505,
+    gid     => 65534,
+    home    => "/var/lib/keystone",
+    shell   => "/bin/false"
+  }
+    
   package { "keystone":
     ensure => latest,
     notify => [Service["apache2"], Service["nova-api"]],
     require => [
       Apt::Source["rcb"],
-      Package["nova-common"]
+      Package["nova-common"],
+      User["keystone"]
     ]
   }
 
