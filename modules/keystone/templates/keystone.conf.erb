@@ -44,7 +44,7 @@ keystone-admin-role = Admin
 # registry server. Any valid SQLAlchemy connection string is fine.
 # See: http://www.sqlalchemy.org/docs/05/reference/sqlalchemy/connections.html#sqlalchemy.create_engine
 sql_connection = sqlite:////var/lib/keystone/keystone.db
-backend_entities = ['UserGroupAssociation', 'UserRoleAssociation', 'Endpoints', 'Role', 'Tenant', 'User', 'Credentials', 'Group', 'EndpointTemplates']
+backend_entities = ['UserRoleAssociation', 'Endpoints', 'Role', 'Tenant', 'User', 'Credentials', 'EndpointTemplates']
 
 # Period in seconds after which SQLAlchemy should reestablish its connection
 # to the database.
