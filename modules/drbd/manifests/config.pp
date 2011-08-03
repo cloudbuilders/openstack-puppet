@@ -70,7 +70,6 @@ class drbd::config {
       owner       => 'root',
       group       => 'root',
       mode        => 0755,
-      refreshonly => true,
       source      => 'puppet:///modules/drbd/drbd-migrate-data.sh'
     }
   }

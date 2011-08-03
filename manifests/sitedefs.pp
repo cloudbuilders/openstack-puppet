@@ -65,9 +65,8 @@ class nova-infra-ha-primary {
   $ha_primary = true
   $ha_initial_setup = true
   include drbd
-  include mysql::server
-  include rabbitmq
-#  include nova-infra-node
+  include one-vm-vlan
+  include nova-infra-node
 }
 
 class nova-infra-ha-secondary {
@@ -75,9 +74,8 @@ class nova-infra-ha-secondary {
   $ha_primary = false
   $ha_initial_setup = true
   include drbd
-  include mysql::server
-  include rabbitmq
-#  include nova-infra-node
+  include one-vm-vlan
+  include nova-infra-node
 }
 
 class swift-common-node {
