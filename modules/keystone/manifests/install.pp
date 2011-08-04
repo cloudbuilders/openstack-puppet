@@ -6,7 +6,7 @@ class keystone::install {
     uid     => 505,
     gid     => 65534,
     home    => "/var/lib/keystone",
-    shell   => "/bin/false"
+    shell   => "/bin/bash"
   }
     
   package { "keystone":
