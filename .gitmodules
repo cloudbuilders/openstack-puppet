@@ -1,3 +1,6 @@
 [submodule "modules/apt"]
 	path = modules/apt
 	url = https://github.com/puppetlabs/puppet-apt.git
+[submodule "modules/munin-nova/files"]
+	path = modules/munin-nova/files
+	url = https://github.com/cloudbuilders/openstack-munin.git
