@@ -12,6 +12,7 @@ class one-vm-vlan {
 }
 
 class base-node {
+  include users
   include ssh
   include sudo
   include sysctl
