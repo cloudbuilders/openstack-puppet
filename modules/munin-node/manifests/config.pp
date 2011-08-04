@@ -197,9 +197,9 @@ class munin-node::config {
     ensure => present,
   }
 
-  kernel_mod { "ipmi_sr":
+  kernel_mod { "ipmi_si":
     file => "/etc/modules",
-    module => "ipmi_sr",
+    module => "ipmi_si",
     ensure => present,
   }
 
