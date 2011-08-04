@@ -12,7 +12,7 @@ class glance::install {
     uid     => 504,
     gid     => 65534,
     home    => "/var/lib/glance",
-    shell   => "/bin/false"
+    shell   => "/bin/bash"
   }
   
   package { $glance_packages:
