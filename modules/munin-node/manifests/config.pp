@@ -1,4 +1,25 @@
 class munin-node::config {
+
+  # This is a general-purpose def that should libe somewhere else...
+  # and was lifted from the Puppet wiki
+  define kernel_mod($file, $module, $ensure = 'present') {
+    case $ensure {
+      default : { err ( "unknown ensure value ${ensure}" ) }
+      present: {
+        exec { "/bin/echo '${module}' >> '${file}'":
+          unless => "/bin/grep -qFx '${module}' '${file}'"
+        }
+	exec { "/sbin/modprobe ${module}": unless => "/bin/grep -q '^${module} ' '/proc/modules'" }
+      }
+      absent: {
+        exec { "/sbin/modprobe -r ${module}": onlyif => "/bin/grep -q '^${module} ' '/proc/modules'" }
+        exec { "/bin/grep -vFx '${module}' '${file}' | /usr/bin/tee '${file}' > /dev/null 2>&1":
+          onlyif => "/bin/grep -qFx '${module}' '${file}'"
+        }
+      }
+    }
+  }
+
   file { "/etc/munin/munin-node.conf":
     ensure  => present,
     owner   => "root",
@@ -166,9 +187,19 @@ class munin-node::config {
 
   # IPMI plugin
 
-  file {"ipmi.modprobe":
-    path => "/etc/modprobe.d/ipmi.conf",
-    source => "puppet:///modules/munin-node/ipmi.modprobe",
+  file {"/etc/modules":
+    ensure => present,
+  }
+
+  kernel_mod { "ipmi_devintf":
+    file => "/etc/modules",
+    module => "ipmi_devintf",
+    ensure => present,
+  }
+
+  kernel_mod { "ipmi_sr":
+    file => "/etc/modules",
+    module => "ipmi_sr",
     ensure => present,
   }
 
