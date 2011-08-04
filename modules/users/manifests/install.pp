@@ -1,8 +1,21 @@
 class users::install {
 
+    # Create RCB group
+    group { "rcb":
+        ensure => present,
+        gid     => 901,
+    }
+
+    # Create users
+    create_user { "dtroyer":
+        uid     => 1001,
+        email   => "dean.troyer@rackspace.com",
+        keyfiles => [ "dtroyer-sweetums.pub", "dtroyer-drteeth.pub" ]
+    }
+
     # Put pubkey files in place
     define user_keys { 
-    	$key_content = file("/etc/puppet/modules/users/files/$name", "/dev/null")
+        $key_content = file("/etc/puppet/modules/users/files/$name", "/dev/null")
         if ! $key_content {
             notify { "Public key file $name not found on keymaster; skipping ensure => present": }
         } else {
@@ -10,18 +23,18 @@ class users::install {
                 err("Can't parse public key file $name")
                 notify { "Can't parse public key file $name on the keymaster: skipping ensure => $ensure": }
             } else { 
-    	        $keytype = $1
-    	        $modulus = $2
-    	        $comment = $3
-    	        ssh_authorized_key { $comment:
+                $keytype = $1
+                $modulus = $2
+                $comment = $3
+                ssh_authorized_key { $comment:
                     ensure  => "present",
                     user    => $username,
                     type    => $keytype,
                     key     => $modulus,
                     options => $options ? { "" => undef, default => $options },
-            	}
-      	    }
-    	}
+                }
+            }
+        }
     } # user_keys
 
     # Create user accounts
@@ -61,5 +74,7 @@ class users::install {
 
         user_keys { $keyfiles: }
     } # create_user
+
+
 
 }

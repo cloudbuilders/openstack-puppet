@@ -1,3 +1,3 @@
 class users {
-  include users::install, users::create,
+  include users::install, users::create
 }
