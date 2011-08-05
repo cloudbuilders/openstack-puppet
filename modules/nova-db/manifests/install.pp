@@ -1,15 +1,17 @@
 class nova-db::install {
   # we only have to install if there isn't a nova db
 
-  exec { "create_nova_db":
-    command     => "mysql -uroot -p${mysql_root_password} -e 'create database nova'",
-    path        => [ "/bin", "/usr/bin" ],
-    unless      => "mysql -uroot -p${mysql_root_password} -sr -e 'show databases' | grep -q nova",
-    notify      => Exec["create_nova_user"],
-    # this *should* be already done with the require mysql::server, but apparently isn't
-    require     => [Service['mysql'], Class['mysql::server']]
+  if ($ha_primary) or (!$use_ha) {
+    exec { "create_nova_db":
+      command     => "mysql -uroot -p${mysql_root_password} -e 'create database nova'",
+      path        => [ "/bin", "/usr/bin" ],
+      unless      => "mysql -uroot -p${mysql_root_password} -sr -e 'show databases' | grep -q nova",
+      notify      => Exec["create_nova_user"],
+      # this *should* be already done with the require mysql::server, but apparently isn't
+      require     => [Service['mysql'], Class['mysql::server']]
+    }
   }
-
+  
   exec { "create_nova_user":
     # FIXME:
     # someone really need to get db access limited to just
