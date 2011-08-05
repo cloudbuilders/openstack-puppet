@@ -1,4 +1,4 @@
-class vm-vlan-network::install {
+class network-vlan-bothip::install {
 
   package { "vlan":
     ensure  => latest,
@@ -18,4 +18,4 @@ class vm-vlan-network::install {
     refreshonly => true
   }
 }
-  
+

@@ -7,8 +7,20 @@ $additional_apt_repos = []
 
 $cluster_name="test"
 
-class one-vm-vlan {
-  include vm-vlan-network
+class vlan-noip-node {
+  include network-vlan-noip
+}
+
+class vlan-mgmtip-node {
+  include network-vlan-mgmtip
+}
+
+class vlan-bothip-node {
+  include network-vlan-bothip
+}
+
+class network-bothip-node {
+  include network-bothip
 }
 
 class base-node {
