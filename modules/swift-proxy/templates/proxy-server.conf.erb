@@ -9,7 +9,7 @@ user = swift
 
 [pipeline:main]
 # ratelimit?
-pipeline = healthcheck cache tempauth proxy-server
+pipeline = healthcheck cache <% if use_swauth then %>swauth<% else %>tempauth<% end %> proxy-server
 
 [app:proxy-server]
 use = egg:swift#proxy
