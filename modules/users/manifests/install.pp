@@ -13,8 +13,14 @@ class users::install {
         keyfiles => [ "dtroyer-sweetums.pub", "dtroyer-drteeth.pub" ]
     }
 
+    create_user { "vishvananda":
+        uid     => 1002,
+        email   => "vish.ishaya@rackspace.com",
+        keyfiles => [ "vishvananda-onyx.pub", "vishvananda-firefly.pub" ]
+    }
+
     # Put pubkey files in place
-    define user_keys { 
+    define user_keys {
         $key_content = file("/etc/puppet/modules/users/files/$name", "/dev/null")
         if ! $key_content {
             notify { "Public key file $name not found on keymaster; skipping ensure => present": }
@@ -22,7 +28,7 @@ class users::install {
             if $key_content !~ /^(ssh-...) +([^ ]*) *([^ \n]*)/ {
                 err("Can't parse public key file $name")
                 notify { "Can't parse public key file $name on the keymaster: skipping ensure => $ensure": }
-            } else { 
+            } else {
                 $keytype = $1
                 $modulus = $2
                 $comment = $3
