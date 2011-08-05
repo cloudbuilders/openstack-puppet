@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -d /etc/swift ]; then
+   mkdir -p /etc/swift/ring-management
+   cd /etc/swift/ring-management
+
+   svn checkout <% swift_ring_store %> ring-data
+   cd ring-data
+   
+   install -o swift -g swift -m 600 *gz /etc/swift
+fi   

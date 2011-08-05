@@ -1,24 +1,22 @@
 class swift-common::config {
-  group { 'swift':
-    ensure => present,
-    gid    => 500
+  if ($swift_ssh_key) {
+    if $swift_ssh_key !~ /^(ssh-...) +([^ ]*) *([^ \n]*)/ {
+      err("Can't parse swift_ssh_key")
+      notify { "Can't parse public key file $name on the keymaster: skipping ensure => $ensure": }
+    } else {
+      $keytype = $1
+      $modulus = $2
+      $comment = $3
+      ssh_authorized_key { $comment:
+        ensure  => "present",
+        user    => $username,
+        type    => $keytype,
+        key     => $modulus,
+        options => $options ? { "" => undef, default => $options },
+      }
+    }
   }
   
-  user { 'swift':
-    ensure  => present,
-    uid     => 500,
-    gid     => 'swift',
-    require => Group['swift']
-  }
-    
-  file { "/etc/swift":
-    ensure => directory,
-    owner  => 'swift',
-    group  => 'swift',
-    mode   => 2770,
-    require => User['swift']
-  }
-
   file { "/etc/swift/swift.conf":
     ensure  => present,
     owner   => 'swift',
@@ -26,5 +24,19 @@ class swift-common::config {
     mode    => 0660,
     content => template('swift-common/swift.conf.erb'),
     require => File["/etc/swift"]
+  }
+
+  if ($swift_use_ring_repo) and ($swift_ring_store) {
+    package { "subversion":
+      ensure => present
+    }
+      
+    file { "/usr/local/bin/update-ring":
+      ensure  => present,
+      owner   => 'swift',
+      group   => 'swift',
+      mode    => 0700,
+      content => template('swift-common/update-ring.erb'),
+    }
   }
 }

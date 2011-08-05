@@ -1,5 +1,4 @@
 class users::install {
-
     # Create RCB group
     group { "rcb":
         ensure => present,
