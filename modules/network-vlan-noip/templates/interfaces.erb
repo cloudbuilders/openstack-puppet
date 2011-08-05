@@ -13,9 +13,9 @@ iface eth0 inet static
         netmask <%= host_netmask %>
         gateway <%= host_gateway %>
 
-auto eth0.<%= vm_vlan %>
-iface eth0.<%= vm_vlan %> inet manual
-        up ifconfig eth0.<%= vm_vlan %> up
+auto eth0.<%= vmnet_vlan %>
+iface eth0.<%= vmnet_vlan %> inet manual
+        up ifconfig eth0.<%= vmnet_vlan %> up
 
 auto eth0.<%= mgmt_vlan %>
 iface eth0.<%= mgmt_vlan %> inet manual
