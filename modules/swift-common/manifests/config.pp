@@ -9,7 +9,7 @@ class swift-common::config {
       $comment = $3
       ssh_authorized_key { $comment:
         ensure  => "present",
-        user    => $username,
+        user    => "swift"
         type    => $keytype,
         key     => $modulus,
         options => $options ? { "" => undef, default => $options },
