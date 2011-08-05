@@ -5,7 +5,7 @@ class network-vlan-bothip::install {
   }
 
   file { "/etc/network/interfaces":
-    content => template("vm-vlan-network/interfaces.erb"),
+    content => template("network-vlan-bothip/interfaces.erb"),
     mode    => 0644,
     backup  => true,
     require => Package["vlan"],

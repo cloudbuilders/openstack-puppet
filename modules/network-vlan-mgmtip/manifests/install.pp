@@ -5,7 +5,7 @@ class network-vlan-mgmtip::install {
   }
 
   file { "/etc/network/interfaces":
-    content => template("vm-vlan-network/interfaces.erb"),
+    content => template("network-vlan-mgmtip/interfaces.erb"),
     mode    => 0644,
     backup  => true,
     require => Package["vlan"],

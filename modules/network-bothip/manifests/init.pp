@@ -1,3 +1,3 @@
-class networkbothip {
-  include networkbothip::install
+class network-bothip {
+  include network-bothip::install
 }

@@ -7,22 +7,6 @@ $additional_apt_repos = []
 
 $cluster_name="test"
 
-class vlan-noip-node {
-  include network-vlan-noip
-}
-
-class vlan-mgmtip-node {
-  include network-vlan-mgmtip
-}
-
-class vlan-bothip-node {
-  include network-vlan-bothip
-}
-
-class network-bothip-node {
-  include network-bothip
-}
-
 class base-node {
   if ($dev_mode) {
     include users
@@ -42,22 +26,28 @@ class nova-base-node {
   include nova-common
 }
 
-class nova-network-node {
-  include nova-base-node
-  include nova-network
-}
-
 class nova-compute-node {
   include munin-node-compute
   include nova-base-node
   include nova-compute
+  include network-vlan-noip
 }
 
-class nova-infra-node {
+class nova-ha-compute-node {
+  include munin-node-compute
+  include nova-base-node
+  include nova-compute
+  include network-both-noip
+  include nova-network
+  include nova-reserve-ip
+}
+
+class nova-ha-infra-node {
   include nova-base-node
   include munin
   include munin-node-infra
   include munin-nova
+  include network-vlan-noip
 
   # data services
   include rabbitmq
@@ -75,6 +65,11 @@ class nova-infra-node {
   include dash
   include keystone
   include openstackx
+}
+
+class nova-infra-node {
+  include nova-ha-infra-node
+  include nova-network
 }
 
 class nova-infra-ha-primary {

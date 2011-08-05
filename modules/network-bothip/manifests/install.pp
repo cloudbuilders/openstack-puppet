@@ -1,11 +1,11 @@
-class networkbothip::install {
+class network-bothip::install {
 
   package { "vlan":
     ensure  => latest,
   }
 
   file { "/etc/network/interfaces":
-    content => template("vmnetwork/interfaces.erb"),
+    content => template("network-bothip/interfaces.erb"),
     mode    => 0644,
     backup  => true,
     require => Package["vlan"],
