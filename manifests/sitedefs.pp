@@ -72,38 +72,35 @@ class nova-infra-node {
   include nova-network
 }
 
-class nova-infra-ha-primary-install {
+# these could all be collapsed with per-host k/v pairs
+class nova-infra-drbd-primary-install {
   $use_ha = true
   $ha_primary = true
   $ha_initial_setup = true
   include drbd
-  include one-vm-vlan
-  include nova-infra-node
+  include nova-ha-infra-node
 }
 
-class nova-infra-ha-secondary-install {
+class nova-infra-drbd-secondary-install {
   $use_ha = true
   $ha_primary = false
   $ha_initial_setup = true
   include drbd
-  include one-vm-vlan
-  include nova-infra-node
+  include nova-ha-infra-node
 }
 
-class nova-infra-ha-primary {
+class nova-infra-drbd-primary {
   $use_ha = true
   $ha_primary = true
   include drbd
-  include one-vm-vlan
-  include nova-infra-node
+  include nova-ha-infra-node
 }
 
-class nova-infra-ha-secondary {
+class nova-infra-drbd-secondary {
   $use_ha = true
   $ha_primary = false
   include drbd
-  include one-vm-vlan
-  include nova-infra-node
+  include nova-ha-infra-node
 }
 
 class swift-common-node {
