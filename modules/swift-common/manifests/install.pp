@@ -14,6 +14,14 @@ class swift-common::install {
     require => Group['swift']
   }
     
+  file { '/home/swift':
+    ensure  => directory,
+    owner   => 'swift',
+    group   => 'swift',
+    mode    => 0700,
+    require => User['swift']
+  }
+  
   file { "/etc/swift":
     ensure => directory,
     owner  => 'swift',

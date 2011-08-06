@@ -13,6 +13,7 @@ class swift-common::config {
         type    => $keytype,
         key     => $modulus,
         options => $options ? { "" => undef, default => $options },
+        require => File["/home/swift"]
       }
     }
   }
