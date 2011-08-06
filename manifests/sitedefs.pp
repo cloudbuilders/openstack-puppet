@@ -47,7 +47,7 @@ class nova-ha-infra-node {
   include munin
   include munin-node-infra
   include munin-nova
-  include network-mgmt-noip
+  include network-vlan-mgmtip
 
   # data services
   include rabbitmq
