@@ -72,7 +72,7 @@ class nova-infra-node {
   include nova-network
 }
 
-class nova-infra-ha-primary {
+class nova-infra-ha-primary-install {
   $use_ha = true
   $ha_primary = true
   $ha_initial_setup = true
@@ -81,10 +81,26 @@ class nova-infra-ha-primary {
   include nova-infra-node
 }
 
-class nova-infra-ha-secondary {
+class nova-infra-ha-secondary-install {
   $use_ha = true
   $ha_primary = false
   $ha_initial_setup = true
+  include drbd
+  include one-vm-vlan
+  include nova-infra-node
+}
+
+class nova-infra-ha-primary {
+  $use_ha = true
+  $ha_primary = true
+  include drbd
+  include one-vm-vlan
+  include nova-infra-node
+}
+
+class nova-infra-ha-secondary {
+  $use_ha = true
+  $ha_primary = false
   include drbd
   include one-vm-vlan
   include nova-infra-node
