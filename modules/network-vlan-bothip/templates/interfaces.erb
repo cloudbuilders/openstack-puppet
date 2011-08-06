@@ -15,12 +15,12 @@ iface eth0 inet static
 
 auto eth0.<%= vm_vlan %>
 iface eth0.<%= vm_vlan %> inet manual
-        address <%= vmnet_ip_address %>
+        address <%= host_vmnet_ip %>
         netmask <%= vmnet_netmask %>
         gateway <%= vmnet_gateway %>
 
 auto eth0.<%= mgmt_vlan %>
 iface eth0.<%= mgmt_vlan %> inet manual
-        address <%= mgmt_ip_address %>
+        address <%= host_mgmt_ip %>
         netmask <%= mgmt_netmask %>
         gateway <%= mgmt_gateway %>
