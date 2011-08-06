@@ -37,7 +37,7 @@ class nova-ha-compute-node {
   include munin-node-compute
   include nova-base-node
   include nova-compute
-  include network-vlan-bothip
+  include network-vlan-noip
   include nova-network
   include nova-reserve-ip
 }
@@ -47,7 +47,7 @@ class nova-ha-infra-node {
   include munin
   include munin-node-infra
   include munin-nova
-  include network-vlan-mgmtip
+  include network-vlan-noip
 
   # data services
   include rabbitmq
