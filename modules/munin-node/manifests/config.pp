@@ -26,8 +26,8 @@ class munin-node::config {
     group   => "root",
     mode    => "644",
     content => template("munin-node/munin-node.conf.erb"),
-    require => Class["munin-node::install"],
-    notify  => Class["munin-node::service"],
+    require => Package["munin-node"],
+    notify => Service["munin-node"]
   }
 
 
