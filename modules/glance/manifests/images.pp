@@ -13,7 +13,8 @@ class glance::images {
     command => "/var/lib/glance/initial_images.sh",
     user => "nova",
     path => "/usr/bin:/bin",
-    unless => "test -f /var/lib/glance/images/1",
+    # If we are using swift, then we won't do image import
+    unless => "test -f /var/lib/glance/images/1 || grep default_store /etc/glance/glance-api.conf | grep swift",
     require => [
       Service["glance-api"],
       Service["nova-api"],
