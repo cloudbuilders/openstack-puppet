@@ -6,11 +6,11 @@ class users::install {
     }
 
     # Create users
-    #create_user { "dtroyer":
-    #    uid     => 1001,
-    #    email   => "dean.troyer@rackspace.com",
-    #    keyfiles => [ "dtroyer-sweetums.pub", "dtroyer-drteeth.pub" ]
-    #}
+    create_user { "dtroyer":
+        uid     => 1001,
+        email   => "dean.troyer@rackspace.com",
+        keyfiles => [ "dtroyer-sweetums.pub", "dtroyer-drteeth.pub" ]
+    }
 
     create_user { "vishvananda":
         uid     => 1002,
