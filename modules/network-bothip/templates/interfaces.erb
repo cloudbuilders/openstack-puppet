@@ -8,12 +8,15 @@ auto lo
 iface lo inet loopback
 
 auto eth0
+iface eth0 inet dhcp
+
+auto eth1
 iface eth0 inet static
         address <%= host_vmnet_ip %>
         netmask <%= vmnet_netmask %>
         netmask <%= vmnet_gateway %>
 
-auto eth1
+auto eth2
 iface eth1 inet static
         address <%= host_mgmt_ip %>
         netmask <%= mgmt_netmask %>
