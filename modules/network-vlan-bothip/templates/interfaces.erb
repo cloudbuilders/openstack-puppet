@@ -18,9 +18,11 @@ iface eth0.<%= vmnet_vlan %> inet static
         address <%= host_vmnet_ip %>
         netmask <%= vmnet_netmask %>
         #gateway <%= vmnet_gateway %>
+        up ifconfig eth0.<%= vmnet_vlan %> up
 
 auto eth0.<%= mgmt_vlan %>
 iface eth0.<%= mgmt_vlan %> inet static
         address <%= host_mgmt_ip %>
         netmask <%= mgmt_netmask %>
         #gateway <%= mgmt_gateway %>
+        up ifconfig eth0.<%= mgmt_vlan %> up
