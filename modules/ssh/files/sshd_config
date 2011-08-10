@@ -84,3 +84,6 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
+
+# Don't disconnect me when I take a coffee break
+ClientAliveInterval=60
