@@ -56,7 +56,7 @@ class munin-nova::config {
     require => Package["munin-node"],
   }
 
-  file {"/etc/munin/plugins/nova_instance_states":
+  file {"/etc/munin/plugins/nova_instance_state":
     ensure => symlink,
     target => "/usr/share/munin/plugins/nova_instance_",
     notify => Service["munin-node"],
