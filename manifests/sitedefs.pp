@@ -42,6 +42,19 @@ class nova-ha-compute-node {
   include nova-reserve-ip
 }
 
+class nova-xen-ha-compute-node {
+#  include ssh
+  include sudo
+  include sysctl
+  include ntp
+  include apt  # additional repos only
+  include rcb-common
+  include nova-common
+  include nova-compute
+  include nova-network
+  include nova-reserve-ip
+}
+
 class nova-ha-infra-node {
   include nova-base-node
   include munin

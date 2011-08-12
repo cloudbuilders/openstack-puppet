@@ -59,6 +59,18 @@
 --glance_api_servers=<%= glance_vip %>
 <% end -%>
 
+<% if has_variable?('use_xenserver') and use_xenserver then -%>
+--connection_type=xenapi
+--xenapi_connection_url=http://169.254.0.1
+--xenapi_connection_username=root
+--xenapi_connection_password=<%= xenapi_password %>
+--flat_interface=xapi1
+--flat_injected=False
+--flat_network_bridge=xapi1
+--xenapi_remap_vbd_dev=1
+--public_interface=eth0
+<% end -%>
+
 # Absent config values, not supported by puppet yet:
 #--auth_driver=nova.auth.$AUTH (ldapdriver or dbdriver if using ldap)
 #--public_interface=$INTERFACE
