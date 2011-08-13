@@ -11,7 +11,7 @@ class nova-db::install {
       require     => [Service['mysql'], Class['mysql::server']]
     }
   }
-  
+
   exec { "create_nova_user":
     # FIXME:
     # someone really need to get db access limited to just
@@ -42,7 +42,7 @@ class nova-db::install {
 
   # FIXME(vish): 256 should be a config flag for network range?
   exec { "create_initial_network":
-    command     => "sudo -u nova nova-manage network create private ${fixed_range} 1 256 T",
+    command     => "sudo -u nova nova-manage network create private ${fixed_range} 1 ${network_size} T",
     path        => [ "/bin", "/usr/bin" ],
     refreshonly => true
   }
