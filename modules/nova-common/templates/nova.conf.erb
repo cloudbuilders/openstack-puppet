@@ -59,10 +59,9 @@
 --glance_api_servers=<%= glance_vip %>
 <% end -%>
 
-<% if has_variable?('use_segroups') and use_xenserver then -%>
+<% if has_variable?('use_secgroups') and use_secgroups then -%>
 --noallow_same_net_traffic
 <% end -%>
-
 <% if has_variable?('use_xenserver') and use_xenserver then -%>
 --connection_type=xenapi
 --xenapi_connection_url=http://169.254.0.1
