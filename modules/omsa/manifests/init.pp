@@ -1,3 +1,3 @@
 class omsa {
-  include omsa::config, omsa::install, omsa::service
+  include omsa::install, omsa::service
 }
