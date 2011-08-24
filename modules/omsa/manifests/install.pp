@@ -1,7 +1,8 @@
 class omsa::install {
 
-  package { "":
+  package { "srvadmin-all":
     ensure => present,
-    notify => Class["omsa::service"],
+    require => Class["omsa::config"],
+    notify => Class["omsa::service"]
   }
 }
