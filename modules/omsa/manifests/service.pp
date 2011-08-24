@@ -17,6 +17,7 @@ class omsa::service {
   service { "dsm_om_connsvc":
     ensure => running,
     enable => true,
+    hasrestart => true,
     require => Class["omsa::install"]
   }
 
