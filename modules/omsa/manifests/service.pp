@@ -7,7 +7,7 @@ class omsa::service {
   }
 
   exec { "omsa-webserver-user":
-    command => "echo 'demo	*	Administrator' > /opt/dell/srvadmin/etc/omarolemap",
+    command => "echo 'demo	*	Administrator' >> /opt/dell/srvadmin/etc/omarolemap",
     refreshonly => true,
     path => [ '/bin' ],
     require => Class["omsa::install"],
