@@ -15,7 +15,7 @@ class users::install {
     create_user { "vishvananda":
         uid     => 1002,
         email   => "vish.ishaya@rackspace.com",
-        keyfiles => [ "vishvananda-onyx.pub", "vishvananda-firefly.pub" ]
+        keyfiles => [ "vishvananda-argent.pub", "vishvananda-firefly.pub" ]
     }
 
     create_user { "jesse":
