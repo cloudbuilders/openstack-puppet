@@ -9,7 +9,7 @@ class users::install {
     create_user { "dtroyer":
         uid     => 1001,
         email   => "dean.troyer@rackspace.com",
-        keyfiles => [ "dtroyer-sweetums.pub", "dtroyer-drteeth.pub" ]
+        keyfiles => [ "dtroyer-sweetums.pub", "dtroyer-beaker.pub" ]
     }
 
     create_user { "vishvananda":
