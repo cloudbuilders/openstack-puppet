@@ -11,12 +11,19 @@ class base-node {
   if ($dev_mode) {
     include users
   }
+  if ($dell_server) {
+    include dell-node
+  }
   include ssh
   include sudo
   include sysctl
   include ntp
   include munin-node
   include apt  # additional repos only
+}
+
+class dell-node {
+  include omsa
 }
 
 class nova-base-node {
