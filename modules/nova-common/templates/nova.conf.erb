@@ -45,6 +45,15 @@
 <% if has_variable?('public_interface') -%>
 --public_interface=<%= public_interface %>
 <% end %>
+<% if has_variable?('vlan_interface') -%>
+--vlan_interface=<%= vlan_interface %>
+<% end %>
+<% if has_variable?('vlan_start') -%>
+--vlan_start=<%= vlan_start %>
+<% end %>
+<% if has_variable?('num_networks') -%>
+--num_networks=<%= num_networks %>
+<% end %>
 <% if has_variable?('dhcp_start') -%>
 --flat_network_dhcp_start=<%= dhcp_start %>
 <% end %>
@@ -76,8 +85,3 @@
 
 # Absent config values, not supported by puppet yet:
 #--auth_driver=nova.auth.$AUTH (ldapdriver or dbdriver if using ldap)
-#--public_interface=$INTERFACE
-#--vlan_interface=$INTERFACE
-
-
-
