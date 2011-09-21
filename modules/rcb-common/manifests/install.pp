@@ -4,10 +4,14 @@ class rcb-common::install {
     $package_repo = "http://devpackages.ansolabs.com"
   }
 
+  if !$package_component {
+    $package_component = "main"
+  }
+
   apt::source { "rcb":
     location => $package_repo,
     release => "maverick",
-    repos => "main",
+    repos => "$package_component",
     key => "460DF9BE",
     key_server => "keyserver.ubuntu.com",
     pin => "1",
