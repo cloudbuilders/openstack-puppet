@@ -8,13 +8,29 @@ class rcb-common::install {
     $package_component = "main"
   }
 
+  # remove this once we get packages signed
+  file { '/etc/apt/apt.conf.d/98allow-unauthenticated':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '600',
+    content => 'APT::Get::AllowUnauthenticated "yes";'
+  }
+
+  file { '/etc/apt/preferences.d/rcb':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '600',
+    content => template('rcb-common/rcb.erb')
+  }  
+
   apt::source { "rcb":
     location => $package_repo,
     release => "maverick",
     repos => "$package_component",
     key => "460DF9BE",
     key_server => "keyserver.ubuntu.com",
-    pin => "1",
     notify => Exec["apt-update"]
   }
 
