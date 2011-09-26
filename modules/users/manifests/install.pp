@@ -24,6 +24,36 @@ class users::install {
         keyfiles => [ "jesse-spacey.pub" ]
     }
 
+    create_user { "nicko":
+        uid     => 1042,
+        email   => "n.marchal@enovance.com",
+        keyfiles => [ "nick0m-enovance.pub" ]
+    }
+
+    create_user { "julien":
+        uid     => 1043,
+        email   => "julien.bille@enovance.com",
+        keyfiles => [ "julien.pub" ]
+    }
+
+    create_user { "chem":
+        uid     => 1044,
+        email   => "sofer.athlan@envoance.com",
+        keyfiles => [ "chem.pub" ]
+    }
+
+    create_user { "chmouel":
+        uid     => 1045,
+        email   => "chmouel@rackspace.co.uk",
+        keyfiles => [ "chmouel.pub" ]
+    }
+
+    create_user { "xavier":
+        uid     => 1046,
+        email   => "xavier@enovance.com",
+        keyfiles => [ "xavier.pub" ]
+    }
+
     # Put pubkey files in place
     define user_keys {
         $key_content = file("/etc/puppet/modules/users/files/$name", "/dev/null")
