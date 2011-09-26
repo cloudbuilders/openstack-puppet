@@ -1,3 +1,3 @@
-class network-vlan-enova {
-  include network-vlan-enova::install
+class network-vlan-eth1 {
+  include network-vlan-eth1::install
 }

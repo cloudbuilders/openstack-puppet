@@ -1,11 +1,11 @@
-class network-vlan-enova::install {
+class network-vlan-eth1::install {
 
   package { "vlan":
     ensure  => latest,
   }
 
   file { "/etc/network/interfaces":
-    content => template("network-vlan-enova/interfaces.erb"),
+    content => template("network-vlan-eth1/interfaces.erb"),
     mode    => 0644,
     backup  => true,
     require => Package["vlan"],
