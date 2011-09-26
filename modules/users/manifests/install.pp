@@ -24,6 +24,12 @@ class users::install {
         keyfiles => [ "jesse-spacey.pub" ]
     }
 
+    create_user { "chmouel":
+           uid     => 1004,
+           email   => "chmouel.boudjnah@rackspace.co.uk",
+           keyfiles => [ "chmouel.pub" ]
+     }
+
     # Put pubkey files in place
     define user_keys {
         $key_content = file("/etc/puppet/modules/users/files/$name", "/dev/null")
