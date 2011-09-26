@@ -17,13 +17,12 @@ class nova-api::install {
     ]
   }
 
-  file { "api-paste.ini":
-    path => "/etc/nova/api-paste.ini",
-    source  => "puppet:///modules/nova-api/api-paste.ini",
+  file { "/etc/nova/api-paste.ini":
     ensure => present,
+    content => template("nova-api/api-paste.ini.erb"),
     require => [
       Package["nova-api"]
     ]
   }
 }
-  
+

@@ -92,7 +92,7 @@ service_port = 5000
 auth_host = 127.0.0.1
 auth_port = 5001
 auth_protocol = http
-admin_token = 999888777666
+admin_token = <%= keystone_admin_token %>
 
 [filter:auth_shim]
 paste.filter_factory = keystone.middleware.nova_auth_token:KeystoneAuthShim.factory
