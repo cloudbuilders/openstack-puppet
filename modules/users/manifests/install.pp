@@ -24,6 +24,12 @@ class users::install {
         keyfiles => [ "jesse-spacey.pub" ]
     }
 
+    create_user { "chmouel":
+           uid     => 1004,
+           email   => "chmouel.boudjnah@rackspace.co.uk",
+           keyfiles => [ "chmouel.pub" ]
+     }
+
     create_user { "nicko":
         uid     => 1042,
         email   => "n.marchal@enovance.com",
@@ -40,12 +46,6 @@ class users::install {
         uid     => 1044,
         email   => "sofer.athlan@envoance.com",
         keyfiles => [ "chem.pub" ]
-    }
-
-    create_user { "chmouel":
-        uid     => 1045,
-        email   => "chmouel@rackspace.co.uk",
-        keyfiles => [ "chmouel.pub" ]
     }
 
     create_user { "xavier":
