@@ -61,10 +61,8 @@
 <% if has_variable?('use_keystone') and use_keystone then -%>
 --api_paste_config=/etc/nova/api-paste.ini
 <% end -%>
-<% if has_variable?('use_glance') and use_glance then -%>
 --image_service=nova.image.glance.GlanceImageService
 --glance_api_servers=<%= glance_vip %>
-<% end -%>
 
 <% if has_variable?('use_secgroups') and use_secgroups then -%>
 --noallow_same_net_traffic
