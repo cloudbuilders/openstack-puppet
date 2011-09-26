@@ -5,12 +5,12 @@ class nova-api::service {
     enable    => true,
     require   => [
       File["nova-default"],
-      File["api-paste.ini"]
+      File["/etc/nova/api-paste.ini"]
     ],
     subscribe => [
       File["/etc/nova/nova.conf"],
-      File["api-paste.ini"]
+      File["/etc/nova/api-paste.ini"]
     ]
   }
-  
+
 }
