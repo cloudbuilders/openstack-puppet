@@ -2,7 +2,6 @@
 #
 # This file is managed by puppet, generated for cluster '<%= cluster_name %>'
 #
-
 --verbose
 --dhcpbridge_flagfile=/etc/nova/nova.conf
 --dhcpbridge=/usr/bin/nova-dhcpbridge
@@ -14,7 +13,6 @@
 --quota_instances=1000
 --quota_cores=1000
 --quota_ram=1000000
---verbose
 --network_manager=nova.network.manager.<%= network_manager %>
 --scheduler_driver=nova.scheduler.simple.SimpleScheduler
 --my_ip=<%= ipaddress_eth0 %>

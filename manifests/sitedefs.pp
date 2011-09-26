@@ -49,6 +49,21 @@ class nova-ha-compute-node {
   include nova-reserve-ip
 }
 
+class nova-ha-compute-vlan-node {
+  include munin-node-compute
+  include nova-base-node
+  include nova-compute
+  include network-vlan-eth1
+  include nova-network
+  include nova-api
+  include openstackx
+}
+
+class empty-node {
+  include base-node
+  include network-vlan-eth1
+}
+
 class nova-xen-ha-compute-node {
 #  include ssh
   include sudo
@@ -69,6 +84,31 @@ class nova-ha-infra-node {
   include munin-nova
   include network-vlan-bothip
   include nova-reserve-ip
+
+  # data services
+  include rabbitmq
+  include mysql::server
+
+  # database setup
+  include nova-db
+
+  # openstack services
+  include nova-api
+  include nova-scheduler
+  include nova-vncproxy
+
+  include glance
+  include dash
+  include keystone
+  include openstackx
+}
+
+class nova-ha-infra-vlan-node {
+  include nova-base-node
+  include munin
+  include munin-node-infra
+  include munin-nova
+  include network-vlan-eth1
 
   # data services
   include rabbitmq
@@ -148,6 +188,7 @@ class nova-infra-drbd-secondary {
 class swift-common-node {
   include base-node
   include swift-common
+  include network-vlan-eth1
 }
 
 class swift-proxy-node {

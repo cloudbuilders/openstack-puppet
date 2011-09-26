@@ -1,12 +1,19 @@
 class nova-api::install {
 
+  package { "python-keystone":
+    ensure => latest,
+    require => [
+      Apt::Source["rcb"],
+    ]
+  }
+
   package { "nova-api":
     ensure => latest,
     require => [
       Apt::Source["rcb"],
       Package["nova-common"],
       Package["openstackx"],
-      Package["keystone"]
+      Package["python-keystone"]
     ]
   }
 

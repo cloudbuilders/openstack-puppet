@@ -9,17 +9,23 @@ user = swift
 
 [pipeline:main]
 # ratelimit?
-pipeline = healthcheck cache <% if use_swauth then %>swauth<% else %>tempauth<% end %> proxy-server
+pipeline = healthcheck cache <% if has_variable?("use_swauth") then %>swauth<% elsif has_variable?("use_keystone")%>keystone<% else %>tempauth<% end %> proxy-server
 
 [app:proxy-server]
 use = egg:swift#proxy
 allow_account_management = <%= swauth_allow_account_management %>
+<% if has_variable?("use_keystone") %>account_autocreate = true<% end %>
 
-<% if use_swauth %>
+<% if has_variable?("use_swauth")%>
 [filter:swauth]
 use = egg:swauth#swauth
 default_swift_cluster = local#<%= swauth_endpoint %>
 super_admin_key = <%= swauth_super_admin_key %>
+<% elsif has_variable?("use_keystone") %>
+[filter:keystone]
+use = egg:keystone#swiftauth
+keystone_admin_token = <%= keystone_admin_token %>
+keystone_url = http://<%= keystone_vip %>:5001/2.0
 <% else %>
 [filter:tempauth]
 use = egg:swift#tempauth
