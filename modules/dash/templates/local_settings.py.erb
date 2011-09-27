@@ -27,10 +27,10 @@ OPENSTACK_KEYSTONE_DEFAULT_ROLE = "Member"
 
 # If you have external monitoring links
 EXTERNAL_MONITORING = [
-    ['CloudKick', 'https://www.cloudkick.com/a/cloudbuilders/'],
+    ['munin', 'http://<%= api_vip %>/munin/'],
     # Pingdom?
 ]
 
-COMPUTE_HOST_RAM_GB = 96
+COMPUTE_HOST_RAM_GB = 16
 SITE_BRANDING = "<%= site_branding %>"
 SWIFT_ENABLED = False

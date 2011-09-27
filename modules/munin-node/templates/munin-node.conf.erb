@@ -41,6 +41,9 @@ ignore_file \.pod$
 # cidr_deny.  Example:
 
 cidr_allow <%= api_vip %>/32
+<% if has_variable?('munin_vip') -%>
+cidr_allow <%= munin_vip %>/32
+<% end %>
 cidr_allow 127.0.0.1/32
 # cidr_allow 192.0.2.0/24
 # cidr_deny  192.0.2.42/32
