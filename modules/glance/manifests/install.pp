@@ -1,6 +1,6 @@
 class glance::install {
   # TODO: Remove python-xattr once it is in glance packaging
-  $glance_packages = [ "glance", "python-glance" ]
+  $glance_packages = [ "glance", "python-glance", "python-swift" ]
 
   package { "python-xattr":
     ensure => present
@@ -24,6 +24,16 @@ class glance::install {
       Package["python-xattr"],
       User["glance"]
     ]
+  }
+
+  file { "glance-api.conf":
+    path => "/etc/glance/glance-api.conf",
+    ensure  => present,
+    owner   => "glance",
+    mode    => 0600,
+    content => template("glance/glance-api.conf.erb"),
+    notify => Service["glance-api"],
+    require => Package["glance"]
   }
 
   file { "/var/log/glance":
