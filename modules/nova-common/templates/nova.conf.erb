@@ -3,7 +3,8 @@
 # This file is managed by puppet, generated for cluster '<%= cluster_name %>'
 #
 
---use_deprecated_auth # this forces nova-manage to export access keys
+# this forces nova-manage to export access keys
+--use_deprecated_auth
 --verbose
 --dhcpbridge_flagfile=/etc/nova/nova.conf
 --dhcpbridge=/usr/bin/nova-dhcpbridge
