@@ -61,9 +61,9 @@ filesystem_store_datadir = /var/lib/glance/images/
 
 # Address where the Swift authentication service lives
 <% if has_variable?('use_keystone') then -%>
-swift_store_auth_address = http://<%= keystone_vip %>:5000/v1.0/
+swift_store_auth_address = http://<%= keystone_vip %>:5000/v1.0
 <% else -%>
-swift_store_auth_address = http://<%= swift_vip %>:8080/v1.0/
+swift_store_auth_address = http://<%= swift_vip %>:8080/v1.0
 <% end -%>
 
 # User to authenticate against the Swift authentication service
@@ -179,4 +179,4 @@ auth_host = <%= keystone_vip %>
 auth_port = 5001
 auth_protocol = http
 auth_uri = http://<%= keystone_vip %>:5000/v2.0
-admin_token = <%= keystone_admin_token %> 
+admin_token = <%= keystone_admin_token %>
