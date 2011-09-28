@@ -13,4 +13,4 @@ sed -i "s/169.254.169.254/94.143.115.132/" $FILE
 sed -i "s/NOVA_USERNAME=\".*\"\$/NOVA_USERNAME=\"$USER\"/" $FILE
 sed -i "s/NOVA_API_KEY=\".*\"\$/NOVA_API_KEY=\"$PASSWORD\"/" $FILE
 sed -i "s/NOVA_PROJECT_ID=\".*\"\$/NOVA_PROJECT_ID=\"$PROJECT\"/" $FILE
-sed -i "s/NOVA_URL=\".*\"\$/NOVA_URL=\"http:\/\/94.143.115.132:5000\/v2.0\/\"/" $FILE
+sed -i "s/NOVA_URL=\".*\"\$/NOVA_URL=\"http:\/\/<%= keystone_vip %>:5000\/v2.0\/\"/" $FILE
