@@ -11,4 +11,11 @@ class nova-common::install {
     content => "ENABLED=1",
     require => Package["nova-common"]
   }
+
+  file { "/usr/local/bin/genrc":
+    ensure  => present,
+    owner   => 'nova',
+    mode    => 0755,
+    content => template('nova-common/genrc.erb'),
+  }
 }

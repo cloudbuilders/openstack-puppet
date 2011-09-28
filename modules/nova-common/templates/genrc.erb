@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+if [ "$2" == "" ]; then
+    echo "usage: $0 <username> <password> <project=username> <file=novarc>"
+    exit 1
+fi
+USER=$1
+PASSWORD=$2
+PROJECT=${3:-$USER}
+FILE=${4:-novarc}
+
+nova-manage project environment $PROJECT $USER $FILE
+sed -i "s/169.254.169.254/94.143.115.132/" $FILE
+sed -i "s/NOVA_USERNAME=\".*\"\$/NOVA_USERNAME=\"$USER\"/" $FILE
+sed -i "s/NOVA_API_KEY=\".*\"\$/NOVA_API_KEY=\"$PASSWORD\"/" $FILE
+sed -i "s/NOVA_PROJECT_ID=\".*\"\$/NOVA_PROJECT_ID=\"$PROJECT\"/" $FILE
+sed -i "s/NOVA_URL=\".*\"\$/NOVA_URL=\"http:\/\/94.143.115.132:5000\/v2.0\/\"/" $FILE
