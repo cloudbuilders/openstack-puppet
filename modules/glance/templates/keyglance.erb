@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+if [ "$2" == "" ]; then
+    echo "usage: $0 <username> <password> ..."
+    exit 1
+fi
+RES=`curl -s -d "{\"passwordCredentials\": {\"username\": \"$1\", \"password\": \"$2\"}}" -H "Content-type: application/json" http://<%= keystone_vip %>:5000/v2.0/tokens | python -mjson.tool`
+HOST=`echo "$RES" | grep glance -A5 | grep publicURL | awk '{print $2}' | cut -d"\"" -f2 | cut -d"/" -f3 | cut -d":" -f1`
+TOKEN=`echo "$RES" | grep token -A3 | grep id | awk '{print $2}' | cut -d"\"" -f2`
+ARGS=($@)
+glance -A $TOKEN -H $HOST ${ARGS[@]:2:3}

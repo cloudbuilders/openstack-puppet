@@ -14,7 +14,7 @@ class glance::install {
     home    => "/var/lib/glance",
     shell   => "/bin/bash"
   }
-  
+
   package { $glance_packages:
     ensure => latest,
     notify => [Service["apache2"], Service["nova-api"]],
@@ -50,5 +50,12 @@ class glance::install {
     require => File["/var/log/glance"]
   }
 
+  file { "/usr/local/bin/keyglance":
+    ensure  => present,
+    owner   => 'glance',
+    group   => 'glance',
+    mode    => 0755,
+    content => template('swift-common/keyglance.erb'),
+  }
 }
-  
+
