@@ -53,7 +53,6 @@ class glance::install {
   file { "/usr/local/bin/keyglance":
     ensure  => present,
     owner   => 'glance',
-    group   => 'glance',
     mode    => 0755,
     content => template('glance/keyglance.erb'),
   }
