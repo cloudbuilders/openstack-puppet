@@ -55,7 +55,7 @@ class glance::install {
     owner   => 'glance',
     group   => 'glance',
     mode    => 0755,
-    content => template('swift-common/keyglance.erb'),
+    content => template('glance/keyglance.erb'),
   }
 }
 
