@@ -37,14 +37,12 @@ class nova-compute-node {
   include munin-node-compute
   include nova-base-node
   include nova-compute
-  include network-vlan-mgmtip
 }
 
 class nova-ha-compute-node {
   include munin-node-compute
   include nova-base-node
   include nova-compute
-  include network-vlan-bothip
   include nova-network
   include nova-reserve-ip
 }
@@ -53,7 +51,6 @@ class nova-ha-compute-vlan-node {
   include munin-node-compute
   include nova-base-node
   include nova-compute
-  include network-vlan-eth1
   include nova-network
   include nova-api
   include openstackx
@@ -61,7 +58,6 @@ class nova-ha-compute-vlan-node {
 
 class empty-node {
   include base-node
-  include network-vlan-eth1
 }
 
 class nova-xen-ha-compute-node {
@@ -82,7 +78,6 @@ class nova-ha-infra-node {
   include munin
   include munin-node-infra
   include munin-nova
-  include network-vlan-bothip
   include nova-reserve-ip
 
   # data services
@@ -108,7 +103,6 @@ class nova-ha-infra-vlan-node {
   include munin
   include munin-node-infra
   include munin-nova
-  include network-vlan-eth1
 
   # data services
   include rabbitmq
@@ -150,7 +144,6 @@ class nova-infra-node {
   include dash
   include keystone
   include openstackx
-  include network-vlan-mgmtip
   include nova-network
 }
 
@@ -188,7 +181,6 @@ class nova-infra-drbd-secondary {
 class swift-common-node {
   include base-node
   include swift-common
-  include network-vlan-eth1
 }
 
 class swift-proxy-node {

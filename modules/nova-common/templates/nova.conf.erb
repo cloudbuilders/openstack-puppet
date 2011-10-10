@@ -15,7 +15,6 @@
 --quota_ram=1000000
 --network_manager=nova.network.manager.<%= network_manager %>
 --scheduler_driver=nova.scheduler.simple.SimpleScheduler
---my_ip=<%= ipaddress_eth0 %>
 --sql_connection=mysql://nova:<%= mysql_nova_password -%>@<%= mysql_vip -%>/nova
 --libvirt_type=<%= libvirt_type %>
 --rabbit_host=<%= rabbitmq_vip %>
