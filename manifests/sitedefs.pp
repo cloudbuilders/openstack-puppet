@@ -14,8 +14,6 @@ class base-node {
   if ($dell_server) {
     include dell-node
   }
-  include ssh
-  include sudo
   include sysctl
   include munin-node
   include apt  # additional repos only
@@ -60,8 +58,6 @@ class empty-node {
 }
 
 class nova-xen-ha-compute-node {
-#  include ssh
-  include sudo
   include sysctl
   include apt  # additional repos only
   include rcb-common
