@@ -41,7 +41,6 @@ class nova-ha-compute-node {
   include nova-base-node
   include nova-compute
   include nova-network
-  include nova-reserve-ip
 }
 
 class nova-ha-compute-vlan-node {
@@ -64,7 +63,6 @@ class nova-xen-ha-compute-node {
   include nova-common
   include nova-compute
   include nova-network
-  include nova-reserve-ip
 }
 
 class nova-ha-infra-node {
@@ -72,7 +70,6 @@ class nova-ha-infra-node {
   include munin
   include munin-node-infra
   include munin-nova
-  include nova-reserve-ip
 
   # data services
   include rabbitmq

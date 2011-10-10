@@ -36,6 +36,16 @@ class glance::install {
     require => Package["glance"]
   }
 
+  file { "glance-registry.conf":
+    path => "/etc/glance/glance-registry.conf",
+    ensure  => present,
+    owner   => "glance",
+    mode    => 0600,
+    content => template("glance/glance-registry.conf.erb"),
+    notify => Service["glance-api"],
+    require => Package["glance"]
+  }
+
   file { "/var/log/glance":
     ensure => directory,
     owner  => "glance",
