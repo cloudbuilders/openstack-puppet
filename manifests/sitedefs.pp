@@ -17,7 +17,6 @@ class base-node {
   include ssh
   include sudo
   include sysctl
-  include ntp
   include munin-node
   include apt  # additional repos only
 }
@@ -64,7 +63,6 @@ class nova-xen-ha-compute-node {
 #  include ssh
   include sudo
   include sysctl
-  include ntp
   include apt  # additional repos only
   include rcb-common
   include nova-common
