@@ -27,7 +27,7 @@ class rcb-common::install {
 
   apt::source { "rcb":
     location => $package_repo,
-    release => "maverick",
+    release => "$package_release",
     repos => "$package_component",
     key => "460DF9BE",
     key_server => "keyserver.ubuntu.com",
