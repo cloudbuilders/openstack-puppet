@@ -41,6 +41,7 @@ class nova-ha-compute-node {
   include nova-base-node
   include nova-compute
   include nova-network
+  include haproxy
 }
 
 class nova-ha-compute-vlan-node {

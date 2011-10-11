@@ -3,6 +3,9 @@
 # This file is managed by puppet, generated for cluster '<%= cluster_name %>'
 #
 --verbose
+<% if has_variable?('use_forwarded_for') and use_forwarded_for then -%>
+--use_forwarded_for
+<% end -%>
 --dhcpbridge_flagfile=/etc/nova/nova.conf
 --dhcpbridge=/usr/bin/nova-dhcpbridge
 --logdir=/var/log/nova
