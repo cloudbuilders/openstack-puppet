@@ -17,12 +17,25 @@
 --quota_cores=1000
 --quota_ram=1000000
 --network_manager=nova.network.manager.<%= network_manager %>
+
+<% if has_variable?('node_availability_zone') and node_availability_zone then -%>
+--node_availability_zone=<%= node_availability_zone %>
+<% else %>
+# default node_availability_zone set
+--node_availability_zone=nova
+<% end %>
+
+<% if has_variable?('scheduler') and scheduler then -%>
+--scheduler_driver=<%= scheduler %>
+<% else %>
 --scheduler_driver=nova.scheduler.simple.SimpleScheduler
+<% end %>
 --sql_connection=mysql://nova:<%= mysql_nova_password -%>@<%= mysql_vip -%>/nova
 --libvirt_type=<%= libvirt_type %>
 --rabbit_host=<%= rabbitmq_vip %>
 --cc_host=<%= api_vip %>
---ec2_dmz_host=<%= api_dmz_ip %>
+#--ec2_dmz_host=<%= api_dmz_ip %>
+--ec2_dmz_host=<%= ipaddress %>
 --dmz_cidr=<%= api_dmz_ip %>/32
 --osapi_extensions_path=/var/lib/nova/extensions
 --vncproxy_url=http://<%= vncproxy_host %>

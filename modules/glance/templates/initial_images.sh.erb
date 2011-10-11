@@ -4,8 +4,6 @@ sudo -u nova wget http://images.ansolabs.com/tty.tgz -O /tmp/tty.tgz
 sudo -u nova mkdir /tmp/images
 sudo -u nova tar -C /tmp/images -zxf /tmp/tty.tgz
 
-sudo -u nova nova-manage image convert /tmp/images
-
 <% if has_variable?("use_keystone") %>
 sudo -u nova glance add name="aki-tty" owner="admin" is_public="True" container_format=aki disk_format=aki  -A <%= keystone_admin_token %> < /tmp/images/aki-tty/image 
 sudo -u nova glance add name="ami-tty" owner="admin" is_public="True" container_format=ami disk_format=ami  -A <%= keystone_admin_token %> < /tmp/images/ami-tty/image
