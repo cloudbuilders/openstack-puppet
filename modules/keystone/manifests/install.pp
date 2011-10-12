@@ -38,6 +38,38 @@ class keystone::install {
     require => Package["keystone"]
   }
 
+
+  if ($ha_primary) or (!$use_ha) {
+    exec { "create_keystone_db":
+      command     => "mysql -uroot -p${mysql_root_password} -e 'create database keystone'",
+      path        => [ "/bin", "/usr/bin" ],
+      unless      => "mysql -uroot -p${mysql_root_password} -sr -e 'show databases' | grep -q keystone",
+      notify      => Exec["create_keystone_user"],
+      # this *should* be already done with the require mysql::server, but apparently isn't
+      require     => [Service['mysql'], Class['mysql::server']]
+    }
+  }
+
+  exec { "create_keystone_user":
+    # FIXME:
+    # someone really need to get db access limited to just
+    # the controller nodes
+    command     => "mysql -uroot -p${mysql_root_password} -e \"grant all on keystone.* to 'keystone'@'%' identified by '${mysql_nova_password}'\"",
+    path        => [ "/bin", "/usr/bin" ],
+    notify      => Exec["sync_keystone_db"],
+    require     => Service['mysql'],
+    refreshonly => true
+  }
+
+  # this is all totally brute force
+  exec { "sync_keystone_db":
+    command     => "sudo -u keystone keystone-manage db_sync",
+    path        => [ "/bin", "/usr/bin" ],
+    notify      => Exec["create_keystone_data"],
+    refreshonly => true,
+    require     => [File["/etc/keystone/keystone.conf"], Package['keystone']]
+  }
+
   exec { "create_keystone_data":
     user => "keystone",
     command     => "/var/lib/keystone/initial_data.sh",

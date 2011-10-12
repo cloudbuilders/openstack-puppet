@@ -142,7 +142,7 @@ delayed_delete = False
 [pipeline:glance-api]
 # NOTE: use the following pipeline for keystone
 <% if has_variable?('use_keystone') then -%>
-pipeline = versionnegotiation authtoken context apiv1app
+pipeline = versionnegotiation authtoken keystone_shim apiv1app
 <% else %>
 pipeline = versionnegotiation context apiv1app
 <% end %>
@@ -180,3 +180,8 @@ auth_port = 5001
 auth_protocol = http
 auth_uri = http://<%= keystone_vip %>:5000/v2.0
 admin_token = <%= keystone_admin_token %>
+
+[filter:keystone_shim]
+context_class = glance.registry.context.RequestContext
+paste.filter_factory = keystone.middleware.glance_auth_token:filter_factory
+

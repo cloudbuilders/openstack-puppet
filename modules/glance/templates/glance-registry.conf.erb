@@ -45,8 +45,7 @@ limit_param_default = 25
 <% if has_variable?('use_keystone') then -%>
 # keystone backed out in puppet for the time being
 # NOTE: use the following pipeline for keystone
-#pipeline = authtoken keystone_shim context registryapp
-pipeline = context registryapp
+pipeline = authtoken keystone_shim registryapp
 <% else %>
 pipeline = context registryapp
 <% end %>
@@ -70,4 +69,5 @@ auth_uri = http://<%= keystone_vip %>:5000/v2.0
 admin_token = <%= keystone_admin_token %>
 
 [filter:keystone_shim]
+context_class = glance.registry.context.RequestContext
 paste.filter_factory = keystone.middleware.glance_auth_token:filter_factory
