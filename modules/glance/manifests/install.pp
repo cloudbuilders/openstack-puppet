@@ -52,7 +52,7 @@ class glance::install {
     owner   => "glance",
     mode    => 0600,
     content => template("glance/glance-registry.conf.erb"),
-    notify => Service["glance-api"],
+    notify => Service["glance-registry"],
     require => Package["glance"]
   }
 

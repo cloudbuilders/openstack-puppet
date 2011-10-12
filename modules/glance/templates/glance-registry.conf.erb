@@ -43,8 +43,10 @@ limit_param_default = 25
 
 [pipeline:glance-registry]
 <% if has_variable?('use_keystone') then -%>
+# keystone backed out in puppet for the time being
 # NOTE: use the following pipeline for keystone
-pipeline = authtoken keystone_shim context registryapp
+#pipeline = authtoken keystone_shim context registryapp
+pipeline = context registryapp
 <% else %>
 pipeline = context registryapp
 <% end %>

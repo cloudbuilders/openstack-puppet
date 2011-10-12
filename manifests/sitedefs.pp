@@ -67,6 +67,30 @@ class nova-xen-ha-compute-node {
   include nova-network
 }
 
+class nova-ha-infra-node-secondary {
+  include nova-base-node
+  include munin
+  include munin-node-infra
+  include munin-nova
+
+  # data services
+  include rabbitmq
+  include mysql::server
+
+  # skip database setup on the secondary node database setup
+  #include nova-db
+
+  # openstack services
+  include nova-api
+  include nova-scheduler
+  include nova-vncproxy
+
+  include glance
+  include dash
+  include keystone
+  include openstackx
+}
+
 class nova-ha-infra-node {
   include nova-base-node
   include munin

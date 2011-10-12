@@ -87,8 +87,9 @@ log_error                = /var/log/mysql/error.log
 # The following can be used as easy to replay backup logs or for replication.
 # note: if you are setting up a replication slave, see README.Debian about
 #       other settings you may need to change.
-#server-id		= 1
-#log_bin			= /var/log/mysql/mysql-bin.log
+server-id		= <%= ipaddress.split(".")[3] %>
+auto_increment_offset   = 10
+log_bin			= /var/log/mysql/mysql-bin.log
 expire_logs_days	= 10
 max_binlog_size         = 100M
 #binlog_do_db		= include_database_name
