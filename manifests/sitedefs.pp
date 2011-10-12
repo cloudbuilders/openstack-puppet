@@ -51,7 +51,6 @@ class nova-ha-compute-vlan-node {
   include nova-network
   include nova-api
   include openstackx
-  include compute-patches
 }
 
 class empty-node {
@@ -137,7 +136,6 @@ class nova-ha-infra-vlan-node {
   include dash
   include keystone
   include openstackx
-  include infra-patches
 }
 
 class nova-infra-node {
