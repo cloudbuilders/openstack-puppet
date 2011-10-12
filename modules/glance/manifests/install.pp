@@ -70,14 +70,13 @@ class glance::install {
     require => File["/var/log/glance"]
   }
 
-<<<<<<< HEAD
   file { "/usr/local/bin/keyglance":
     ensure  => present,
     owner   => 'glance',
     mode    => 0755,
     content => template('glance/keyglance.erb'),
   }
-=======
+
   if ($ha_primary) or (!$use_ha) {
     exec { "create_glance_db":
       command     => "mysql -uroot -p${mysql_root_password} -e 'create database glance'",
@@ -108,6 +107,5 @@ class glance::install {
     require     => [File["/etc/glance/glance-registry.conf"], Package['glance']]
   }
 
->>>>>>> 95f0e728f43fd196a998143224eca3c6f4ad4602
 }
 
