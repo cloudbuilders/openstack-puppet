@@ -28,7 +28,17 @@ class keystone::install {
     notify => Service["keystone"],
     require => Package["keystone"]
   }
-  
+
+  file { "add-keystone-user.sh":
+    path => "/var/lib/keystone/add-keystone-user.sh",
+    ensure  => present,
+    owner   => "keystone",
+    mode    => 0700,
+    source  => "puppet:///modules/keystone/add-keystone-user.sh",
+    notify => Service["keystone"],
+    require => Package["keystone"]
+  }
+
   file { "initial_data.sh":
     path => "/var/lib/keystone/initial_data.sh",
     ensure  => present,
