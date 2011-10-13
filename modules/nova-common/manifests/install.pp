@@ -17,5 +17,6 @@ class nova-common::install {
     owner   => 'nova',
     mode    => 0755,
     content => template('nova-common/genrc.erb'),
+    require => Package["nova-common"]
   }
 }
