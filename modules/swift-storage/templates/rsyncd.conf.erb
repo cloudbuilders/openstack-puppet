@@ -4,7 +4,7 @@ gid = swift
 # this should really be bound on an internal-only network
 log file = /var/log/rsyncd.log
 pid file = /var/run/rsyncd.pid
-address = 0.0.0.0
+address = <%= eval("ipaddress_#{swift_storage_net_interface}") %>
 
 [account]
 max connections = 2

@@ -196,6 +196,7 @@ class nova-infra-drbd-secondary {
 
 class swift-common-node {
   include base-node
+  include rcb-common
   include swift-common
 }
 

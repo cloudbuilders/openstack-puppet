@@ -1,5 +1,5 @@
 [DEFAULT]
-bind_ip = 0.0.0.0
+bind_ip = <%= eval("ipaddress_#{swift_storage_net_interface}") %>
 workers = 2
 
 [pipeline:main]
