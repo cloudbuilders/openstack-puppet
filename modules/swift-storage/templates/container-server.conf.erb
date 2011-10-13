@@ -1,5 +1,5 @@
 [DEFAULT]
-bind_ip = <%= eval("ipaddress_#{swift_storage_net_interface}") %>
+bind_ip = <%= if has_variable?('swift_storage_net_interface') then eval("ipaddress_#{swift_storage_net_interface}") else "0.0.0.0" end %>
 workers = 2
 
 [pipeline:main]

@@ -32,11 +32,11 @@ class swift-common::install {
 
   package { $swift_common_packages:
     ensure  => latest,
-    require => [ Apt::Source['swift'], User['swift'] ]
+    require => [ Apt::Source['rcb'], User['swift'] ]
   }
 
   package { $swift_common_misc:
     ensure  => present,
-    require => Apt::Source['swift']
+    require => Apt::Source['rcb']
   }
 }
