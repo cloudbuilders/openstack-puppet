@@ -3,7 +3,7 @@ class dash::install {
   $dash_common_packages = [ "git", "apache2", "libapache2-mod-wsgi" ]
   
   package { "python-django":
-    ensure => "1.3-2",
+    ensure => "latest",
     require => [
       Apt::Source["rcb"]
     ]
