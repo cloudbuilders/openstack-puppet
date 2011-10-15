@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Tenants
-keystone-manage $* tenant add admin
+keystone-manage $* tenant add <%= nova_admin_user %>
 keystone-manage $* tenant add demo
 
 # Users
 keystone-manage $* user add demo secrete demo
-keystone-manage $* user add admin secrete admin
+keystone-manage $* user add <%= nova_admin_user %> <%= nova_admin_password %> <%= nova_admin_user %>
 
 # Roles
 keystone-manage $* role add Admin
 keystone-manage $* role add Member
-keystone-manage $* role grant Admin admin
+keystone-manage $* role grant Admin <%= nova_admin_user %>
 
 #endpointTemplates
 keystone-manage $* endpointTemplates add RegionOne swift http://<%= swift_proxy_vip %>:8080/v1/AUTH_%tenant_id% http://<%= swift_proxy_vip %>:8080/ http://<%= swift_proxy_vip %>:8080/v1/AUTH_%tenant_id% 1 1
@@ -21,15 +21,15 @@ keystone-manage $* endpointTemplates add RegionOne glance http://<%= api_vip %>:
 keystone-manage $* endpointTemplates add RegionOne identity http://<%= api_vip %>:5000/v2.0 http://<%= api_vip %>:5001/v2.0 http://<%= api_vip %>:5000/v2.0 1 1
 
 # Tokens
-keystone-manage $* token add <%= keystone_admin_token %> admin admin 2015-02-05T00:00
+keystone-manage $* token add <%= keystone_admin_token %> <%= nova_admin_user %> <%= nova_admin_user %> 2015-02-05T00:00
 
 #Tenant endpoints
-keystone-manage $* endpoint add admin 1
-keystone-manage $* endpoint add admin 2
-keystone-manage $* endpoint add admin 3
-keystone-manage $* endpoint add admin 4
-keystone-manage $* endpoint add admin 5
-keystone-manage $* endpoint add admin 6
+keystone-manage $* endpoint add <%= nova_admin_user %> 1
+keystone-manage $* endpoint add <%= nova_admin_user %> 2
+keystone-manage $* endpoint add <%= nova_admin_user %> 3
+keystone-manage $* endpoint add <%= nova_admin_user %> 4
+keystone-manage $* endpoint add <%= nova_admin_user %> 5
+keystone-manage $* endpoint add <%= nova_admin_user %> 6
 
 keystone-manage $* endpoint add demo 1
 keystone-manage $* endpoint add demo 2
