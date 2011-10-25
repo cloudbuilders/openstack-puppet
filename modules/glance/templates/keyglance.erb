@@ -8,4 +8,4 @@ RES=$(curl -s -d "{\"passwordCredentials\": {\"username\": \"$1\", \"password\":
 HOST=$(echo $RES | sed 's/.*"glance":[^}]*"publicURL":.*http:\/\/\([^:]*\).*/\1/g')
 TOKEN=$(echo $RES | sed -e 's/.*"token":[^}]*"id":[^"]*"\([^"]*\).*/\1/g')
 ARGS=($@)
-glance -A $TOKEN -H $HOST ${ARGS[@]:2:3}
+glance -A $TOKEN -H $HOST ${ARGS[@]:2:15}
