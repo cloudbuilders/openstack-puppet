@@ -37,8 +37,7 @@
 --libvirt_type=<%= libvirt_type %>
 --rabbit_host=<%= rabbitmq_vip %>
 --cc_host=<%= api_vip %>
-#--ec2_dmz_host=<%= api_dmz_ip %>
---ec2_dmz_host=<%= ipaddress %>
+--ec2_dmz_host=<%= api_dmz_ip %>
 --dmz_cidr=<%= api_dmz_ip %>/32
 --osapi_extensions_path=/var/lib/nova/extensions
 --vncproxy_url=http://<%= vncproxy_host %>
