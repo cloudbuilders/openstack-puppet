@@ -13,11 +13,11 @@ keystone-manage $* role add Admin
 keystone-manage $* role add Member
 keystone-manage $* role grant Admin <%= nova_admin_user %>
 
+<% if has_variable?('glance_swift_user') %>
 #glance->swift user
-<% if has_variable?('swift_glance_user') %>
 keystone-manage tenant add <%= glance_swift_user %>
 keystone-manage user add <%= glance_swift_user %> <%= glance_swift_key %> <%= glance_swift_user %>
-<% end -%>
+<% end %>
 
 #endpointTemplates
 keystone-manage $* endpointTemplates add RegionOne swift http://<%= swift_proxy_vip %>:8080/v1/AUTH_%tenant_id% http://<%= swift_proxy_vip %>:8080/ http://<%= swift_proxy_vip %>:8080/v1/AUTH_%tenant_id% 1 1
